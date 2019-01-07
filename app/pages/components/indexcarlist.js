@@ -61,7 +61,7 @@ const GetShopList = () => (<Query
 </Query>);
 
 
-export default class Sidemenucomponent extends Component {
+export default class IndexCarListComponent extends Component {
 
 
     render() {

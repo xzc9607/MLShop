@@ -17,6 +17,8 @@ import Sidemenucomponent from '../components/sidemenucomponent';
 import Swipercomponent from './../components/swipercomponent';
 import Indexheader from './../components/indexheader';
 import Indexiconbox from './../components/indexiconbox';
+import IndexLabellist from './../components/indexlabellist';
+
 
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
@@ -41,8 +43,6 @@ export default class Indexpage extends Component {
     }
 
     render() {
-        //店铺选择(侧边菜单)
-
         return (
             <SideMenu
                 menu={<Sidemenucomponent />}
@@ -82,9 +82,7 @@ export default class Indexpage extends Component {
                         </View>
 
                         <View style={{ height: 5, backgroundColor: '#ebebeb' }}></View>
-
                         <Indexiconbox />
-
                         <View style={{ height: 5, backgroundColor: '#ebebeb' }}></View>
 
                         <View style={styles.newcarchooseview}>
@@ -118,32 +116,10 @@ export default class Indexpage extends Component {
                             <View style={styles.newcarchoosebox}><Text style={styles.newcarchooseview3text}>新车上架</Text></View>
                         </View>
 
-                        <View style={styles.zero}>
-                            <View style={styles.zerobox}>
-                                <View><Text style={{ fontSize: 20, color: 'white' }}>0首付</Text></View>
-                                <View style={{ width: (width / 10) * 4 }}></View>
-                                <View style={{ width: (width / 5), height: 30, backgroundColor: 'white', borderRadius: 10, justifyContent: 'center', alignItems: 'center', }}><Text style={{ fontSize: 15, color: '#FF2d16' }}>更多车型</Text></View>
-                            </View>
-                        </View>
-                        <View style={{ backgroundColor: 'white' }}>
-                            <View style={styles.listtext}>
-                                <View style={styles.listhead}><Text style={{ color: 'white' }}>0首付</Text></View>
-                                <View style={styles.listbody}>
-                                    <View style={{ width: width / 2, marginStart: 20 }}>
-                                        <Text style={{ color: 'black', fontSize: 30 }}>轩逸·纯电</Text>
-                                        <Text>2018款 高配版</Text>
-                                        <Text style={{ color: '#FF2d16' }}>首付5000元</Text>
-                                        <Text>月供5000元</Text>
-                                    </View>
-                                    <View style={{ width: width / 2, justifyContent: 'center', alignItems: 'center', marginStart: -30 }}>
-                                        <Image
-                                            resizeMode='stretch' style={styles.listimage}
-                                            source={require('./../../../static/img/car.jpg')} />
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
+                        <IndexLabellist/>
 
+                        
+                    
                         <View style={{ height: 5, backgroundColor: '#ebebeb' }}></View>
 
                         <View style={{ height: 80, backgroundColor: '#ebebeb', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>

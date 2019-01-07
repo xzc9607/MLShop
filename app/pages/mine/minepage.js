@@ -32,9 +32,15 @@ export default class Minepage extends Component {
         tabBarIcon: ({ focused, tintColor }) => (
             <Icon name='user' size={25} color="#ffffff" />
         )
+        
+
     };
     constructor(props) {
         super(props);
+        ()=>{
+            this.props.navigation.setParams({abc: 'Updated!'})
+        }
+        
 
         this.state = {
             sourceData1: [
@@ -91,9 +97,7 @@ export default class Minepage extends Component {
                         <Text>我的咨询</Text>
                     </View>
                 </View>
-
-                <View style={{ height: 15 }}></View>
-
+                <View style={{ marginTop: 15 }}></View>
                 <FlatList
                     data={this.state.sourceData1}
                     ItemSeparatorComponent={ItemDivideComponent}
@@ -132,7 +136,7 @@ const styles = StyleSheet.create({
         //主容器
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#ebebeb'
+        backgroundColor:'#ebebeb'
     },
     nameview: {
         height: 20,

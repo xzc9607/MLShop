@@ -21,7 +21,6 @@ const { width } = Dimensions.get('window')//获取当前屏幕宽度
 export default class Carpage extends Component {
     static navigationOptions = {
         header: null,
-
     };
 
     constructor(props) {

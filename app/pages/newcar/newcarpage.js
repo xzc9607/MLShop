@@ -8,14 +8,80 @@ import {
     ScrollView,
     TextInput,
     TouchableWithoutFeedback,
+    FlatList
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import Swipercomponent from './../components/swipercomponent';
 import Indexheader from './../components/indexheader';
-
-
-
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
+const query = gql`
+query{
+    CarInfoList{
+      content{
+        id
+        brand
+        label
+        model
+        guidePrice
+      }
+    }
+}
+`;
+
+const GetNewCarList = () => (<Query
+    query={query}>{
+        ({ loading, error, data }) => {
+            var carlist = [];
+            var xcsj = [];
+            if (loading == true) {
+                return null;
+            } else {
+                this.carlist = data.CarInfoList.content;
+                console.log(this.carlist);
+                for (var i = this.carlist.length - 1; i > this.carlist.length - 21; i--) {
+                    xcsj.push(this.carlist[i]);
+                }
+
+                return (
+
+                    <FlatList
+                        data={xcsj}
+                        renderItem={({ item }) =>
+                            <TouchableWithoutFeedback
+                                onPress={() => this.props.navigation.navigate('CarPage')}
+                            >
+                                <View style={{ backgroundColor: 'white' }}>
+                                    <View style={styles.listtext}>
+                                        <View style={{ width: width / 2, justifyContent: 'center', alignItems: 'center', }}>
+                                            <Image resizeMode='stretch' style={styles.listimage}
+                                                source={require('./../../../static/img/car.jpg')} />
+                                        </View>
+                                        <View style={styles.listbody}>
+                                            <View style={{ width: width / 2, marginStart: 20 }}>
+                                                <Text style={{ color: 'black', fontSize: 20 }}>{item.brand}</Text>
+                                                <Text style={{ color: 'black', fontSize: 20 }}>{item.model}</Text>
+                                                <Text>厂商指导价{item.guidePrice}万</Text>
+                                                <Text style={{ color: '#FF2d16' }}>首付0元 月供6000元</Text>
+                                            </View>
+
+                                        </View>
+                                    </View>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        } />
+
+
+
+
+                )
+            }
+
+
+        }
+    }
+</Query>);
 
 export default class NewCarpage extends Component {
     static navigationOptions = {
@@ -39,7 +105,7 @@ export default class NewCarpage extends Component {
         return (
             //头部
             <View style={styles.container}>
-                <Indexheader/>
+                <Indexheader />
 
                 <View style={{ height: 45, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
                     <View
@@ -63,35 +129,17 @@ export default class NewCarpage extends Component {
                 </View>
                 <ScrollView>
                     <View style={styles.swiperview}>
-                        <Swipercomponent/>
+                        <Swipercomponent />
                     </View>
 
                     <View style={{ marginTop: 15, backgroundColor: 'white' }}></View>
 
-                    <TouchableWithoutFeedback
-                        onPress={()=> this.props.navigation.navigate('CarPage')}
-                    >
-                    <View style={{ backgroundColor: 'white' }}>
-                        <View style={styles.listtext}>
-                            <View style={{ width: width / 2 ,justifyContent: 'center', alignItems: 'center',}}>
-                                <Image resizeMode='stretch' style={styles.listimage}
-                                    source={require('./../../../static/img/car.jpg')} />
-                            </View>
-                            <View style={styles.listbody}>
-                                <View style={{ width: width / 2, marginStart: 20 }}>
-                                    <Text style={{ color: 'black', fontSize: 20 }}>轩逸·纯电</Text>
-                                    <Text style={{ color: 'black', fontSize: 20 }}>2018款 高配版</Text>
-                                    <Text>厂商指导价9.58万</Text>
-                                    <Text style={{ color: '#FF2d16' }}>首付0元 月供6000元</Text>
-                                </View>
-
-                            </View>
-                        </View>
-                    </View>
-                    </TouchableWithoutFeedback>
+                    <GetNewCarList />
 
                 </ScrollView>
-            </View>
+            </View >
+
+
 
         );
     }

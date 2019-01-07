@@ -74,7 +74,7 @@ const RootStack = createStackNavigator(
 );
 
 const client = new ApolloClient({
-  uri: `http://115.159.154.194/graphql`
+  uri: `http://115.159.154.194/mlshop/graphql`
 });
 
 const AppContainer = createAppContainer(RootStack);

@@ -10,11 +10,70 @@ import {
     TouchableWithoutFeedback,
     StatusBar,
     BackHandler,
-    ToastAndroid
+    ToastAndroid,
+    FlatList
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import SideMenu from 'react-native-side-menu';
 import Swiper from 'react-native-swiper';
+
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+
+const query = gql`
+query{
+    AdvertisementList{
+      content{
+        id
+        image
+      }
+    }
+}
+`;
+
+const GetAdvList = () => (<Query
+    query={query}>{
+        ({ loading, error, data }) => {
+            let advurl = '';
+            let adv = [];
+            if (loading == true) {
+                return null
+            } else {
+                this.advurl = data.AdvertisementList.content[0].image;
+                this.adv = this.advurl.split(',');
+
+            }
+
+            return (
+                <Swiper style={styles.wrapper}
+                    paginationStyle={styles.paginationStyle}
+                    dotStyle={styles.dotStyle}
+                    activeDotStyle={styles.activeDotStyle}
+                    autoplay
+                    loop>
+                    
+                    <View style={styles.slide}>
+                        <Image resizeMode='stretch' style={{ width: this.width, height: 150 }}
+                            source={{ uri: 'http://mlshopimage.oss-cn-shanghai.aliyuncs.com/' + this.adv[0] }} />
+                    </View>
+                    <View style={styles.slide}>
+                        <Image resizeMode='stretch' style={{ width: this.width, height: 150 }}
+                            source={{ uri: 'http://mlshopimage.oss-cn-shanghai.aliyuncs.com/' + this.adv[1] }} />
+                    </View>
+                    <View style={styles.slide}>
+                        <Image resizeMode='stretch' style={{ width: this.width, height: 150 }}
+                            source={{ uri: 'http://mlshopimage.oss-cn-shanghai.aliyuncs.com/' + this.adv[2] }} />
+                    </View>
+                    <View style={styles.slide}>
+                        <Image resizeMode='stretch' style={{ width: this.width, height: 150 }}
+                            source={{ uri: 'http://mlshopimage.oss-cn-shanghai.aliyuncs.com/' + this.adv[3] }} />
+                    </View>
+                </Swiper>
+
+            )
+        }
+    }
+</Query>);
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
@@ -23,29 +82,7 @@ export default class Swipercomponent extends Component {
 
     render() {
         return (
-            <Swiper style={styles.wrapper}
-                paginationStyle={styles.paginationStyle}
-                dotStyle={styles.dotStyle}
-                activeDotStyle={styles.activeDotStyle}
-                autoplay
-                loop>
-                <View style={styles.slide}>
-                    <Image resizeMode='stretch' style={styles.image}
-                        source={require('./../../../static/img/1.jpg')} />
-                </View>
-                <View style={styles.slide}>
-                    <Image resizeMode='stretch' style={styles.image}
-                        source={require('./../../../static/img/2.jpg')} />
-                </View>
-                <View style={styles.slide}>
-                    <Image resizeMode='stretch' style={styles.image}
-                        source={require('./../../../static/img/3.jpg')} />
-                </View>
-                <View style={styles.slide}>
-                    <Image resizeMode='stretch' style={styles.image}
-                        source={require('./../../../static/img/4.jpg')} />
-                </View>
-            </Swiper>
+            <GetAdvList/>
 
         );
 
@@ -80,7 +117,7 @@ const styles = StyleSheet.create({
         height: 21,
     },
     wrapper: {
-        height: 50
+        height: 80
     },
     slide: {
         justifyContent: 'center',

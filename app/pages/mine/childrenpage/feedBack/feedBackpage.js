@@ -7,7 +7,9 @@ const { width } = Dimensions.get('window')//获取当前屏幕宽度
 export default class userInformation extends Component {
 
     static navigationOptions = {
-        header: null,
+        headerTitle: 'afadsf',
+        //title: 'Home',
+        
 
     };
 
