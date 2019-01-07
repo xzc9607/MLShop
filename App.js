@@ -30,6 +30,10 @@ import Forgetpassword from './app/pages/login/forgetpassword/forgetpasswordpage'
 import userInformation from './app/pages/mine/childrenpage/userinformation/userinformation';
 import Carpage from './app/pages/car/carpage';
 
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import gql from 'graphql-tag';
+
 const RootStack = createStackNavigator(
   {
     //登陆页面
@@ -69,14 +73,18 @@ const RootStack = createStackNavigator(
   }
 );
 
-const App = createAppContainer(RootStack);
+const client = new ApolloClient({
+  uri: `http://115.159.154.194/graphql`
+});
 
-// export default class App extends React.Component {
-//   render() {
-//     return <App/>;
-//   }
-// }
+const AppContainer = createAppContainer(RootStack);
 
-export default App;
+export default class App extends React.Component {
+  render() {
+    return <ApolloProvider client={client}><AppContainer/></ApolloProvider>;
+  }
+}
+
+//export default App;
 
 
