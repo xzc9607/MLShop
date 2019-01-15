@@ -11,6 +11,9 @@ import {
     BackHandler,
     ToastAndroid
 } from 'react-native';
+import {
+    Linking
+} from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import SideMenu from 'react-native-side-menu';
 import Sidemenucomponent from '../components/sidemenucomponent';
@@ -69,7 +72,9 @@ export default class Indexpage extends Component {
                         /></View>
                         <View
                             style={{ justifyContent: 'flex-end', marginStart: 10 }}
-                        ><Icon name='phone' size={20} color="#000" /></View>
+                        ><TouchableWithoutFeedback  onPress={() => {
+                            Linking.openURL(`tel:${`10086`}`)
+                        }}><Icon name='phone' size={20} color="#000" /></TouchableWithoutFeedback></View>
                     </View>
 
 

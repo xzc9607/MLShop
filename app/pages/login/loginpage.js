@@ -60,6 +60,7 @@ export default class Login extends Component {
             .then((response) => {
               res=JSON.parse(response._bodyText)
               if(res.code==200){
+                AsyncStorage.setItem('user', formData);
                 this.props.navigation.navigate('Main');
               }else{
                   alert(res.msg)

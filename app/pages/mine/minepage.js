@@ -54,13 +54,24 @@ export default class Minepage extends Component {
                 { key: '意见反馈', function: 'FeedBack' },
                 { key: '帮助中心', function: 'Help' },
                 { key: '设置', function: 'MySetting' }],
-                
+            username:''
   
         }
-        
-        console.log();
-        
-        
+
+
+
+            AsyncStorage.getItem('user', function (error, result) {
+                if (error) {
+                    alert('读取失败')
+                }else {
+                    console.log(result)
+                    //JSON.parse(result);
+                }
+            }).then(result=>{
+                this.setState({'username':JSON.parse(result).username});
+                console.log(this.state.username);
+            })
+
 
     }
 
@@ -81,13 +92,13 @@ export default class Minepage extends Component {
                         >
                             <Image
                                 style={styles.profilephoto}
-                                source={require('./../../../static/img/brightPoints/gps导航系统.png')} />
+                                source={{uri: 'https://mlshopimg.oss-cn-hangzhou.aliyuncs.com/'+this.state.username+'.png'}} />
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
 
                 <View style={styles.nameview}>
-                    <Text>{this.username}</Text>
+                    <Text>{this.state.username}</Text>
                 </View>
                 <View style={styles.nameview}>
                     <Text>0首付，开新车</Text>
@@ -201,6 +212,8 @@ const styles = StyleSheet.create({
     },
     profilephoto: {
         //头像
+        width: 100, 
+        height: 100,
         alignItems: 'center'
     },
     tabBarIcon: {
