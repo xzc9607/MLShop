@@ -12,6 +12,7 @@ import {
     BackHandler,
     ToastAndroid
 } from 'react-native';
+import { AsyncStorage } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import Minepageheader from './../components/minepageheader';
 
@@ -35,12 +36,13 @@ export default class Minepage extends Component {
         
 
     };
+    
     constructor(props) {
         super(props);
         ()=>{
             this.props.navigation.setParams({abc: 'Updated!'})
         }
-        
+
 
         this.state = {
             sourceData1: [
@@ -51,8 +53,15 @@ export default class Minepage extends Component {
                 { key: '了解猛龙汽车', function: 'Understanding' },
                 { key: '意见反馈', function: 'FeedBack' },
                 { key: '帮助中心', function: 'Help' },
-                { key: '设置', function: 'MySetting' }]
+                { key: '设置', function: 'MySetting' }],
+                
+  
         }
+        
+        console.log();
+        
+        
+
     }
 
 
@@ -78,7 +87,7 @@ export default class Minepage extends Component {
                 </View>
 
                 <View style={styles.nameview}>
-                    <Text>用户名</Text>
+                    <Text>{this.username}</Text>
                 </View>
                 <View style={styles.nameview}>
                     <Text>0首付，开新车</Text>

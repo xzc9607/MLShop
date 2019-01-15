@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Button from 'react-native-button';
 import Minepageheader from './../../../components/minepageheader';
+import { AsyncStorage } from "react-native";
+
 
 
 import { Query } from "react-apollo";
