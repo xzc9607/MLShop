@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
 import { View, Image, StyleSheet, Text, TextInput, Dimensions, TouchableWithoutFeedback, BackHandler, ToastAndroid } from 'react-native';
 import Button from 'react-native-button';
+<<<<<<< HEAD
 import Global from '../Global';
 import { AsyncStorage } from "react-native";
 
+=======
+>>>>>>> parent of 04a703a... login&register
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
-
 
 
 export default class Login extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = { 
-            username: '' ,
-            password:''
-
-        };
     }
 
     static navigationOptions = {
         header: null,
 
     };
-    
 
     componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
@@ -46,34 +42,6 @@ export default class Login extends Component {
         return true;
     };
 
-    login() {
-        let formData = {
-          "username":this.state.username,
-          "password":this.state.password
-        }
-      
-        fetch(gUrl.url+'/login',
-        {
-           method:"POST",   //请求方法
-           mode: "cors",
-           body:JSON.stringify(formData),   //请求体
-      　　　　headers: {
-      　　　　'Accept': 'application/json',
-      　　　　'Content-Type': 'application/json',
-      　　　　 }})
-            .then((response) => {
-              res=JSON.parse(response._bodyText)
-              if(res.code==200){
-                this.props.navigation.navigate('Main');
-              }else{
-                  alert(res.msg)
-              }
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-      }
-
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
@@ -90,13 +58,11 @@ export default class Login extends Component {
                 <TextInput
                     style={login.textInput1}
                     placeholder={'请输入用户名'}
-                    onChangeText={(username) => this.setState({username})}
                     underlineColorAndroid={'gray'}
                 />
                 <TextInput
                     style={login.textInput2}
                     placeholder={'请输入密码'}
-                    onChangeText={(password) => this.setState({password})}
                     secureTextEntry={true}
                 />
 
@@ -104,7 +70,7 @@ export default class Login extends Component {
                     style={{ fontSize: 20, color: 'white' }}
                     styleDisabled={{ color: 'red' }}
                     containerStyle={{ padding: 5, height: 40, width: 280, marginTop: 50, overflow: 'hidden', borderRadius: 12, backgroundColor: 'red' }}
-                    onPress={() => this.login()}>
+                    onPress={() => this.props.navigation.navigate('Main')}>
                     登陆
                 </Button>
 
