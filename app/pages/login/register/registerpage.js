@@ -36,7 +36,7 @@ export default class Register extends Component {
       　　　　 }})
             .then((response) => {
               res=JSON.parse(response._bodyText)
-              if(res.code==200){
+              if(res.code==201){
                 this.props.navigation.navigate('Login');
               }else{
                   alert(res.msg)
