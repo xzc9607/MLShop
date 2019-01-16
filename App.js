@@ -68,7 +68,7 @@ const RootStack = createStackNavigator(
 
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Login',
     headerMode: 'screen'
   }
 );

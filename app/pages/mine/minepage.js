@@ -70,7 +70,10 @@ export default class Minepage extends Component {
             }).then(result=>{
                 this.setState({'username':JSON.parse(result).username});
                 console.log(this.state.username);
-            })
+            }).catch(function(error) {
+                console.log('There has been a problem with your fetch operation: ');
+
+                })
 
 
     }
