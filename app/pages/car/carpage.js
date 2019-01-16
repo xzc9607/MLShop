@@ -9,7 +9,8 @@ import {
     TextInput,
     TouchableWithoutFeedback,
     BackHandler,
-    ToastAndroid
+    ToastAndroid,
+    Button
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import SideMenu from 'react-native-side-menu';
@@ -48,6 +49,7 @@ export default class Carpage extends Component {
                             dotStyle={styles.dotStyle}
                             activeDotStyle={styles.activeDotStyle}
                             autoplay
+                            autoplayTimeout={5}
                             loop>
                             <View style={styles.slide}>
                                 <Image resizeMode='stretch' style={styles.image}
@@ -100,6 +102,11 @@ export default class Carpage extends Component {
 
 
                 </ScrollView>
+                <Button
+                    onPress={()=> (alert('立刻购买'))}
+                    title="提交"
+                    color="red"
+                    />
             </View>
 
         );
