@@ -22,25 +22,25 @@ export default class Login extends Component {
 
     };
 
-    componentWillMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
-    }
+    // componentWillMount() {
+    //     BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
+    // }
 
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
-    }
+    // componentWillUnmount() {
+    //     BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
+    // }
 
-    onBackAndroid = () => {
-        if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
-            //最近2秒内按过back键，可以退出应用。
-            BackHandler.exitApp();
-            return false;
-        }
-        this.lastBackPressed = Date.now();
-        ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
-        // return true;
-        return true;
-    };
+    // onBackAndroid = () => {
+    //     if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+    //         //最近2秒内按过back键，可以退出应用。
+    //         BackHandler.exitApp();
+    //         return false;
+    //     }
+    //     this.lastBackPressed = Date.now();
+    //     ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
+    //     // return true;
+    //     return true;
+    // };
 
     login() {
         let formData = {
@@ -60,8 +60,13 @@ export default class Login extends Component {
             .then((response) => {
               res=JSON.parse(response._bodyText)
               if(res.code==200){
-                AsyncStorage.setItem('user', formData);
-                this.props.navigation.navigate('Main');
+                AsyncStorage.setItem('user', formData.username).then((res)=>{
+                    this.props.navigation.navigate('Main');
+                }).catch((res)=>{
+                    console.log(formData.username)
+                    alert('存入失败')
+                });
+                
               }else{
                   alert(res.msg)
               }

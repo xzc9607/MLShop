@@ -28,6 +28,8 @@ import gql from "graphql-tag";
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
+
+
 export default class Indexpage extends Component {
     static navigationOptions = {
         tabBarLabel: '首页',
@@ -60,8 +62,6 @@ export default class Indexpage extends Component {
            
     }
 
-    
-
     render() {
         return (
             <SideMenu
@@ -89,7 +89,7 @@ export default class Indexpage extends Component {
                         /></View>
                         <View
                             style={{ justifyContent: 'flex-end', marginStart: 10 }}
-                        ><TouchableWithoutFeedback  onPress={() =>this.getnumber()}><Icon name='phone' size={20} color="#000" /></TouchableWithoutFeedback></View>
+                        ><TouchableWithoutFeedback  onPress={() => this.getnumber()}><Icon name='phone' size={20} color="#000" /></TouchableWithoutFeedback></View>
                     </View>
 
 

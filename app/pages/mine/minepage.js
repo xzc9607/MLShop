@@ -10,9 +10,9 @@ import {
     Alert,
     TouchableWithoutFeedback,
     BackHandler,
-    ToastAndroid
+    ToastAndroid,
+    AsyncStorage
 } from 'react-native';
-import { AsyncStorage } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import Minepageheader from './../components/minepageheader';
 
@@ -64,12 +64,12 @@ export default class Minepage extends Component {
                 if (error) {
                     alert('读取失败')
                 }else {
-                    console.log(result)
+                    //console.log(result)
                     //JSON.parse(result);
                 }
             }).then(result=>{
-                this.setState({'username':JSON.parse(result).username});
-                console.log(this.state.username);
+                this.setState({'username':result});
+                //console.log(this.state.username);
             }).catch(function(error) {
                 console.log('There has been a problem with your fetch operation: ');
 

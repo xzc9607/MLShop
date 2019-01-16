@@ -18,17 +18,36 @@ export default class help extends Component {
     
   }
 
-  getshoplist(){
+  abc(){
    
-    fetch(gUrl.url+'/getshoplist')
-        .then((response) => {
-          res=JSON.parse(response._bodyText)
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+    AsyncStorage.getItem('user', function (error, result) {
+      if (error) {
+          alert('读取失败')
+      }else {
+          console.log(result)
+          //JSON.parse(result);
+      }
+  }).then(result=>{
+      this.setState({'username':JSON.parse(result).username});
+      console.log(this.state.username);
+  }).catch(function(error) {
+      console.log('There has been a problem with your fetch operation: ');
+
+      })
   }
+
+  def(){
+    let formData = {
+      "username":'xzc',
+      "password":'xzc'
+    }
+
+    AsyncStorage.setItem('user', formData).catch((error=>{
+      console.log('asf');
+    }));
+  }
+
+
 
   render() {
     return (
@@ -37,8 +56,16 @@ export default class help extends Component {
                     style={{ fontSize: 20, color: 'white' }}
                     styleDisabled={{ color: 'red' }}
                     containerStyle={{ padding: 5, height: 40, width: 280, marginTop: 50, overflow: 'hidden', borderRadius: 12, backgroundColor: 'red' }}
-                    onPress={() => this.getshoplist()}>
-                    点击
+                    onPress={() => this.abc()}>
+                    点击2
+                </Button>
+
+                <Button
+                    style={{ fontSize: 20, color: 'white' }}
+                    styleDisabled={{ color: 'red' }}
+                    containerStyle={{ padding: 5, height: 40, width: 280, marginTop: 50, overflow: 'hidden', borderRadius: 12, backgroundColor: 'red' }}
+                    onPress={() => this.def()}>
+                    点击1
                 </Button>
 
         
