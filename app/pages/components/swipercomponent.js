@@ -87,6 +87,7 @@ export default class Swipercomponent extends Component {
                     dotStyle={styles.dotStyle}
                     activeDotStyle={styles.activeDotStyle}
                     autoplay
+                    autoplayTimeout={5}
                     loop>
                     
                     <View style={styles.slide}>

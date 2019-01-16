@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Dimensions } from 'react-native';
+import { Text, View, Image, Dimensions, AsyncStorage } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import Minepageheader from './../../../components/minepageheader';
-import { AsyncStorage } from "react-native";
 
 
 

@@ -5,64 +5,18 @@ import {
     Image,
     FlatList,
     TouchableWithoutFeedback,
-    Alert
+    Alert,
+    AsyncStorage
 } from 'react-native';
 import Indexheader from './indexheader';
 
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-
-// const query = gql`
-// query{
-//     ShopList{
-//       content{
-//         id
-//         name
-//         address
-//       }
-//     }
-// }
-// `;
-
-// const GetShopList = () => (<Query
-//     query={query}>{
-//         ({ loading, error, data }) => {
-//             if (loading == true) return null;
-//             console.log(data.ShopList.content)
-//             return (
-
-//                 <FlatList
-//                     data={data.ShopList.content}
-//                     renderItem={({ item }) =>
-//                         <TouchableWithoutFeedback
-//                             onPress={()=>{
-//                                 Alert.alert(item.id)
-//                             }}
-//                         >
-//                             <View style={{ height: 110, marginStart: 20 }}>
-//                                 <View style={{ justifyContent: 'center', marginTop: 10 }}><Text style={{ color: 'black', fontSize: 18 }}>{item.name}</Text></View>
-//                                 <View style={{ justifyContent: 'center', marginTop: 10 }}><Text>{item.address}</Text></View>
-//                                 <View style={{ justifyContent: 'center', marginTop: 10 }}>
-//                                     <View style={{ height: 20, width: 100, backgroundColor: '#ffbf00', flexDirection: 'row', justifyContent: 'center' }}>
-//                                         <Text style={{ fontSize: 13, color: '#FF2d16', borderRadius: 10 }}>猛龙汽车商城</Text>
-//                                     </View>
-//                                 </View>
-//                                 <View style={{ height: 1, backgroundColor: '#ebebeb', marginTop: 10 }}></View>
-//                             </View>
-//                         </TouchableWithoutFeedback>
-//                     }
-//                 />
-
-
-
-//             )
-//         }
-//     }
-// </Query>);
-
-
 
 export default class Sidemenucomponent extends Component {
+    static navigationOptions = {
+        header: null,
+
+    };
+
     constructor(props){
         super(props);
         this.state={
@@ -97,7 +51,8 @@ export default class Sidemenucomponent extends Component {
                     renderItem={({ item }) =>
                         <TouchableWithoutFeedback
                             onPress={()=>{
-                                Alert.alert(""+item.id+"")
+                                Alert.alert('已选择'+item.name);
+                                AsyncStorage.setItem('number',''+item.number+'');
                             }}
                         >
                             <View style={{ height: 110, marginStart: 20 }}>

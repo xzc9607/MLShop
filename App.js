@@ -81,7 +81,9 @@ const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
   render() {
-    return <ApolloProvider client={client}><AppContainer/></ApolloProvider>;
+    return <ApolloProvider client={client}>
+              <AppContainer/>
+          </ApolloProvider>;
   }
 }
 

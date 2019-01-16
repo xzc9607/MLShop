@@ -9,11 +9,11 @@ import {
     TextInput,
     TouchableWithoutFeedback,
     BackHandler,
-    ToastAndroid
+    ToastAndroid,
+    Linking,
+    AsyncStorage
 } from 'react-native';
-import {
-    Linking
-} from 'react-native';
+
 import Icon from "react-native-vector-icons/AntDesign";
 import SideMenu from 'react-native-side-menu';
 import Sidemenucomponent from '../components/sidemenucomponent';
@@ -45,6 +45,23 @@ export default class Indexpage extends Component {
         };
     }
 
+    getnumber(){
+        //拨打选中店铺电话
+        AsyncStorage.getItem('number', function (error, result) {
+            if (error) {
+                alert('读取失败')
+            }else {
+                //console.log(result)
+                //JSON.parse(result);
+            }
+        }).then(result=>{
+            Linking.openURL('tel:${'+ result +'}')
+        })
+           
+    }
+
+    
+
     render() {
         return (
             <SideMenu
@@ -72,9 +89,7 @@ export default class Indexpage extends Component {
                         /></View>
                         <View
                             style={{ justifyContent: 'flex-end', marginStart: 10 }}
-                        ><TouchableWithoutFeedback  onPress={() => {
-                            Linking.openURL(`tel:${`10086`}`)
-                        }}><Icon name='phone' size={20} color="#000" /></TouchableWithoutFeedback></View>
+                        ><TouchableWithoutFeedback  onPress={() =>this.getnumber()}><Icon name='phone' size={20} color="#000" /></TouchableWithoutFeedback></View>
                     </View>
 
 
