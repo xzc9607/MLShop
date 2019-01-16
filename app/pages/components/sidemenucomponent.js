@@ -12,31 +12,92 @@ import Indexheader from './indexheader';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-const query = gql`
-query{
-    ShopList{
-      content{
-        id
-        name
-        address
-      }
+// const query = gql`
+// query{
+//     ShopList{
+//       content{
+//         id
+//         name
+//         address
+//       }
+//     }
+// }
+// `;
+
+// const GetShopList = () => (<Query
+//     query={query}>{
+//         ({ loading, error, data }) => {
+//             if (loading == true) return null;
+//             console.log(data.ShopList.content)
+//             return (
+
+//                 <FlatList
+//                     data={data.ShopList.content}
+//                     renderItem={({ item }) =>
+//                         <TouchableWithoutFeedback
+//                             onPress={()=>{
+//                                 Alert.alert(item.id)
+//                             }}
+//                         >
+//                             <View style={{ height: 110, marginStart: 20 }}>
+//                                 <View style={{ justifyContent: 'center', marginTop: 10 }}><Text style={{ color: 'black', fontSize: 18 }}>{item.name}</Text></View>
+//                                 <View style={{ justifyContent: 'center', marginTop: 10 }}><Text>{item.address}</Text></View>
+//                                 <View style={{ justifyContent: 'center', marginTop: 10 }}>
+//                                     <View style={{ height: 20, width: 100, backgroundColor: '#ffbf00', flexDirection: 'row', justifyContent: 'center' }}>
+//                                         <Text style={{ fontSize: 13, color: '#FF2d16', borderRadius: 10 }}>猛龙汽车商城</Text>
+//                                     </View>
+//                                 </View>
+//                                 <View style={{ height: 1, backgroundColor: '#ebebeb', marginTop: 10 }}></View>
+//                             </View>
+//                         </TouchableWithoutFeedback>
+//                     }
+//                 />
+
+
+
+//             )
+//         }
+//     }
+// </Query>);
+
+
+
+export default class Sidemenucomponent extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            list:[]
+        };
+        //获取店铺列表
+        fetch(gUrl.url+'/getshoplist')
+            .then((response) => {
+              this.res=JSON.parse(response._bodyText);
+              this.setState({list:this.res});
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+
+        
+
     }
-}
-`;
+  
 
-const GetShopList = () => (<Query
-    query={query}>{
-        ({ loading, error, data }) => {
-            if (loading == true) return null;
-            console.log(data.ShopList.content)
-            return (
 
+    render() {
+        return (
+            <View style={{ flex: 1, backgroundColor: 'white' }}>
+                <Indexheader />
+                <View style={{ height: 45, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
+                    <Text style={{ color: 'black', fontSize: 20 }}>请选择店铺</Text>
+                </View>
+                <View style={{ height: 1, backgroundColor: '#ebebeb' }}></View>
                 <FlatList
-                    data={data.ShopList.content}
+                    data={this.state.list}
                     renderItem={({ item }) =>
                         <TouchableWithoutFeedback
                             onPress={()=>{
-                                Alert.alert(item.id)
+                                Alert.alert(""+item.id+"")
                             }}
                         >
                             <View style={{ height: 110, marginStart: 20 }}>
@@ -52,27 +113,6 @@ const GetShopList = () => (<Query
                         </TouchableWithoutFeedback>
                     }
                 />
-
-
-
-            )
-        }
-    }
-</Query>);
-
-
-export default class Sidemenucomponent extends Component {
-
-
-    render() {
-        return (
-            <View style={{ flex: 1, backgroundColor: 'white' }}>
-                <Indexheader />
-                <View style={{ height: 45, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
-                    <Text style={{ color: 'black', fontSize: 20 }}>请选择店铺</Text>
-                </View>
-                <View style={{ height: 1, backgroundColor: '#ebebeb' }}></View>
-                <GetShopList />
             </View>
 
         );

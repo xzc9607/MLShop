@@ -11,32 +11,37 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import gql from "graphql-tag";
 
-const query = gql`
-query{
-  CarInfoList{
-    content{
-      id
-      model
-    }
-  }
-}
-`;
 
-const GetCarInfoList = () => (<Query
-  query={query}>{
-    ({ loading, error, data }) => {
-      if (loading == true) return <View><Text>正在加载</Text></View>;
-      console.log(data.CarInfoList.content)
-      return <View><Text>成功</Text></View>
-    }
-  }
-</Query>);
 export default class help extends Component {
+  constructor(props){
+    super(props);
+    
+  }
+
+  getshoplist(){
+   
+    fetch(gUrl.url+'/getshoplist')
+        .then((response) => {
+          res=JSON.parse(response._bodyText)
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+  }
+
   render() {
     return (
       <View>
+      <Button
+                    style={{ fontSize: 20, color: 'white' }}
+                    styleDisabled={{ color: 'red' }}
+                    containerStyle={{ padding: 5, height: 40, width: 280, marginTop: 50, overflow: 'hidden', borderRadius: 12, backgroundColor: 'red' }}
+                    onPress={() => this.getshoplist()}>
+                    点击
+                </Button>
 
-        <GetCarInfoList />
+        
       </View>
     );
   }
