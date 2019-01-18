@@ -13,8 +13,7 @@ import {
 import Icon from "react-native-vector-icons/AntDesign";
 import Swipercomponent from './../components/swipercomponent';
 import Indexheader from './../components/indexheader';
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import Global from '../Global';
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 
@@ -38,6 +37,15 @@ export default class NewCarpage extends Component {
         };
 
         //getcarlist
+        fetch(gUrl.localurl+'/getnewcarlist')
+            .then((response) => {
+              this.res=JSON.parse(response._bodyText);
+              this.setState({'carlist':this.res})
+              //console.log(this.res[209])
+            })
+            .catch((error) => {
+              console.log(error)
+            })
 
     }
 

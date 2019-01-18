@@ -8,6 +8,7 @@ const  isIPhoneX = (ios && height == 812 && width == 375);
 const  statusBarHeight = (ios ? (isIPhoneX ? 44 : 20) : StatusBar.currentHeight);
 const httpurl='http://47.101.160.154/mlshop';
 const localurl='http://192.168.0.112:8080';
+const carimgurl='https://mlshopimg.oss-cn-hangzhou.aliyuncs.com/carimg/';
 
 
 global.gScreen = {
@@ -25,5 +26,6 @@ global.gDevice = {
 
 global.gUrl={
     httpurl:httpurl,
-    localurl:localurl
+    localurl:localurl,
+    carimgurl:carimgurl
 }
