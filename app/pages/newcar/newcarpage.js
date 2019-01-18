@@ -16,73 +16,6 @@ import Indexheader from './../components/indexheader';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
-// const query = gql`
-// query{
-//     CarInfoList{
-//       content{
-//         id
-//         brand
-//         label
-//         model
-//         guidePrice
-//       }
-//     }
-// }
-// `;
-
-// const GetNewCarList = () => (<Query
-//     query={query}>{
-//         ({ loading, error, data }) => {
-//             var carlist = [];
-//             var xcsj = [];
-//             if (loading == true) {
-//                 return null;
-//             } else {
-//                 this.carlist = data.CarInfoList.content;
-//                 console.log(this.carlist);
-//                 for (var i = this.carlist.length - 1; i > this.carlist.length - 21; i--) {
-//                     xcsj.push(this.carlist[i]);
-//                 }
-
-//                 return (
-
-//                     <FlatList
-//                         data={xcsj}
-//                         renderItem={({ item }) =>
-//                             <TouchableWithoutFeedback
-//                                 onPress={() => this.props.navigation.navigate('CarPage')}
-//                             >
-//                                 <View style={{ backgroundColor: 'white' }}>
-//                                     <View style={styles.listtext}>
-//                                         <View style={{ width: width / 2, justifyContent: 'center', alignItems: 'center', }}>
-//                                             <Image resizeMode='stretch' style={styles.listimage}
-//                                                 source={require('./../../../static/img/car.jpg')} />
-//                                         </View>
-//                                         <View style={styles.listbody}>
-//                                             <View style={{ width: width / 2, marginStart: 20 }}>
-//                                                 <Text style={{ color: 'black', fontSize: 20 }}>{item.brand}</Text>
-//                                                 <Text style={{ color: 'black', fontSize: 20 }}>{item.model}</Text>
-//                                                 <Text>厂商指导价{item.guidePrice}万</Text>
-//                                                 <Text style={{ color: '#FF2d16' }}>首付0元 月供6000元</Text>
-//                                             </View>
-
-//                                         </View>
-//                                     </View>
-//                                 </View>
-//                             </TouchableWithoutFeedback>
-//                         } />
-
-
-
-
-//                 )
-//             }
-
-
-//         }
-//     }
-// </Query>);
-
 
 
 
@@ -100,29 +33,11 @@ export default class NewCarpage extends Component {
         this.state = {
             text: '个性SUV',
             isOpen: false,
-            carlist:[{
-                "id": "eP44uaH7G9q8TUS1lIVk23A11",
-                "brand": "北汽幻速",
-                "label": null,
-                "model": "2017款幻速S5 1.3T 手动尊贵型",
-                "guidePrice": "7.68万"
-              },
-              {
-                "id": "KQlopnITGNOZzfiu6S6yG3A11",
-                "brand": "北汽幻速",
-                "label": null,
-                "model": "2015款幻速H3 1.5L 手动舒适型",
-                "guidePrice": "5.98万"
-              },
-              {
-                "id": "znXL0GEJHtqRBY8vSegrF3A11",
-                "brand": "北汽幻速",
-                "label": null,
-                "model": "2017款幻速H6 1.5L 基本型 厢式运输车",
-                "guidePrice": "5.98万"
-              }]
+            carlist:[]
 
         };
+
+        //getcarlist
 
     }
 

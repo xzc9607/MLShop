@@ -23,7 +23,7 @@ export default class Sidemenucomponent extends Component {
             list:[]
         };
         //获取店铺列表
-        fetch(gUrl.url+'/getshoplist')
+        fetch(gUrl.httpurl+'/getshoplist')
             .then((response) => {
               this.res=JSON.parse(response._bodyText);
               this.setState({list:this.res});

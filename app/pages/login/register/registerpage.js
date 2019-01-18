@@ -25,7 +25,7 @@ export default class Register extends Component {
           "password":this.state.password
         }
       
-        fetch(gUrl.url+'/register',
+        fetch(gUrl.httpurl+'/register',
         {
            method:"POST",   //请求方法
            mode: "cors",

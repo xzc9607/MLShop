@@ -48,7 +48,7 @@ export default class Login extends Component {
           "password":this.state.password
         }
       
-        fetch(gUrl.url+'/login',
+        fetch(gUrl.httpurl+'/login',
         {
            method:"POST",   //请求方法
            mode: "cors",
