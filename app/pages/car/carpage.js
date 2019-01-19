@@ -16,6 +16,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import SideMenu from 'react-native-side-menu';
 import Swiper from 'react-native-swiper';
 import Indexheader from './../components/indexheader';
+import { WebView } from "react-native-webview";
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
@@ -99,14 +100,36 @@ export default class Carpage extends Component {
 
                     <View style={{ height: 10, backgroundColor: '#ebebeb' }}></View>
 
+                    <WebView
+                        source={{uri: 'https://a.xcar.com.cn/1412/m11105/config.html'}}
+                        style={{height:7800}}
+                        />
+
+                    
+
+
 
 
                 </ScrollView>
-                <Button
-                    onPress={()=> (alert('立刻购买'))}
-                    title="提交"
-                    color="red"
-                    />
+                <View style={{flexDirection: 'row' }}>
+                    <View style={{width:width/2}}>
+                        <Button
+                            onPress={()=> (alert('立刻购买'))}
+                            title="关注该车"
+                            color="#ff4d00"
+                        />
+                    </View>
+
+                    <View style={{width:width/2}}>
+                        <Button
+                            onPress={()=> (alert('立刻购买'))}
+                            title="立刻购买"
+                            color="red"
+                        />
+                    </View>
+                </View>
+                
+                
             </View>
 
         );

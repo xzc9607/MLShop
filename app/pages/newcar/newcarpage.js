@@ -8,7 +8,8 @@ import {
     ScrollView,
     TextInput,
     TouchableWithoutFeedback,
-    FlatList
+    FlatList,
+    WebView
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import Swipercomponent from './../components/swipercomponent';
@@ -108,6 +109,8 @@ export default class NewCarpage extends Component {
                                 </View>
                             </TouchableWithoutFeedback>
                         } />
+
+                        
 
                     
 
