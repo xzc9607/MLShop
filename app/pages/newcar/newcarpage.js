@@ -88,7 +88,7 @@ export default class NewCarpage extends Component {
                         data={this.state.carlist}
                         renderItem={({ item }) =>
                             <TouchableWithoutFeedback
-                                onPress={() => this.props.navigation.navigate('CarPage')}
+                                onPress={() => this.props.navigation.navigate('CarPage',{item})}
                             >
                                 <View style={{ backgroundColor: 'white' }}>
                                     <View style={styles.listtext}>

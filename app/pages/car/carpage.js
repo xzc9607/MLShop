@@ -10,12 +10,14 @@ import {
     TouchableWithoutFeedback,
     BackHandler,
     ToastAndroid,
-    Button
+    Button,
+    Linking
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import SideMenu from 'react-native-side-menu';
 import Swiper from 'react-native-swiper';
 import Indexheader from './../components/indexheader';
+import Swipercomponent from './../components/swipercomponent';
 import { WebView } from "react-native-webview";
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
@@ -32,6 +34,9 @@ export default class Carpage extends Component {
             isOpen: false
 
         };
+        //console.log(this.props.navigation.state.params.item.brand);
+
+        
     }
 
     
@@ -44,43 +49,19 @@ export default class Carpage extends Component {
 
                 <ScrollView style={{ backgroundColor: 'white' }}>
                     <View style={styles.swiperview}>
-                        <Swiper style={styles.wrapper}
-                            onMomentumScrollEnd={(e, state, context) => console.log('index:', state.index)}
-                            paginationStyle={styles.paginationStyle}
-                            dotStyle={styles.dotStyle}
-                            activeDotStyle={styles.activeDotStyle}
-                            autoplay
-                            autoplayTimeout={5}
-                            loop>
-                            <View style={styles.slide}>
-                                <Image resizeMode='stretch' style={styles.image}
-                                    source={require('./../../../static/img/1.jpg')} />
-                            </View>
-                            <View style={styles.slide}>
-                                <Image resizeMode='stretch' style={styles.image}
-                                    source={require('./../../../static/img/2.jpg')} />
-                            </View>
-                            <View style={styles.slide}>
-                                <Image resizeMode='stretch' style={styles.image}
-                                    source={require('./../../../static/img/3.jpg')} />
-                            </View>
-                            <View style={styles.slide}>
-                                <Image resizeMode='stretch' style={styles.image}
-                                    source={require('./../../../static/img/4.jpg')} />
-                            </View>
-                        </Swiper>
+                        <Swipercomponent/>
                     </View>
 
                     <View style={{ height: 50, backgroundColor: 'red', justifyContent: 'center' }}>
-                        <Text style={{ fontSize: 25, color: 'white', marginStart: 20 }}>0首付</Text>
+                        <Text style={{ fontSize: 25, color: 'white', marginStart: 20 }}>{this.props.navigation.state.params.item.brand}</Text>
                     </View>
                     <View style={{ alignItems: 'center' }}>
-                        <View style={{ height: 140, width: width - 40, marginTop: 20 }}>
+                        <View style={{ height: 160, width: width - 40, marginTop: 20 }}>
                             <View>
-                                <Text style={{ fontSize: 20, color: 'black' }}>轩逸·纯电 高配版</Text>
+                                <Text style={{ fontSize: 20, color: 'black' }}>{this.props.navigation.state.params.item.model}</Text>
 
                             </View>
-                            <View style={{ marginTop: 5 }}><Text>厂商指导价：9.58万</Text></View>
+                            <View style={{ marginTop: 5 }}><Text>厂商指导价：{this.props.navigation.state.params.item.guideprice}</Text></View>
                             <View style={{ alignItems: 'flex-end' }}>
                                 <View style={{ height: 20, width: 200, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}>
                                     <Text style={{ color: 'white' }}>服务费2888，砍0元开新车</Text>
@@ -92,8 +73,16 @@ export default class Carpage extends Component {
                             </View>
                             <View style={{ height: 1, backgroundColor: '#ebebeb' }}></View>
                             <View style={{ flexDirection: 'row', height: 50, alignItems: 'center' }}>
-                                <View style={styles.listhead}><Text style={{ color: 'white' }}>0首付</Text></View>
-                                <Text>详情【立即咨询】卖家</Text>
+                                <View style={styles.listhead}><Text style={{ color: 'white' }}>猛龙汽车商城</Text></View>
+                                <TouchableWithoutFeedback
+                                    onPress={()=>{
+                                        Linking.openURL('tel:13812345678')
+                                    }}
+                                ><Text>详情【立即咨询】卖家</Text>
+                                </TouchableWithoutFeedback>
+                                
+                                
+
                             </View>
                         </View>
                     </View>
@@ -101,7 +90,15 @@ export default class Carpage extends Component {
                     <View style={{ height: 10, backgroundColor: '#ebebeb' }}></View>
 
                     <WebView
-                        source={{uri: 'https://a.xcar.com.cn/1412/m11105/config.html'}}
+                        source={{uri: this.props.navigation.state.params.item.url}}
+                        injectedJavaScript={
+                            'document.getElementsByClassName("crumbs")[0].remove();'+
+                            'document.getElementsByClassName("nav clearfix")[0].remove();'+
+                            'document.getElementsByClassName("cartype-name")[0].remove();'+
+                            'document.getElementsByClassName("fixed-vs")[0].remove();'+
+                            'document.getElementsByClassName("list-slidenav")[0].remove();'+
+                            'document.getElementsByClassName("footer")[0].remove();'    
+                        }
                         style={{height:7800}}
                         />
 
@@ -114,7 +111,7 @@ export default class Carpage extends Component {
                 <View style={{flexDirection: 'row' }}>
                     <View style={{width:width/2}}>
                         <Button
-                            onPress={()=> (alert('立刻购买'))}
+                            onPress={()=> (alert('待实现'))}
                             title="关注该车"
                             color="#ff4d00"
                         />
@@ -122,7 +119,7 @@ export default class Carpage extends Component {
 
                     <View style={{width:width/2}}>
                         <Button
-                            onPress={()=> (alert('立刻购买'))}
+                            onPress={()=> (alert('待实现'))}
                             title="立刻购买"
                             color="red"
                         />
@@ -183,7 +180,7 @@ const styles = StyleSheet.create({
         height: 21,
     },
     swiperview: {
-        height: 200,
+        height: 150,
     },
     swiperview2: {
         height: 20,
@@ -252,7 +249,7 @@ const styles = StyleSheet.create({
     listhead: {
         borderRadius: 5,
         height: 20,
-        width: 40,
+        width: 85,
         backgroundColor: '#FF2d16',
     },
 });
