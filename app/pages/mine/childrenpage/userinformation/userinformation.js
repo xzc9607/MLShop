@@ -23,7 +23,7 @@ export default class userInformation extends Component {
                 //JSON.parse(result);
             }
         }).then(result=>{
-            this.setState({'username':JSON.parse(result).username});
+            this.setState({'username':result});
             console.log(this.state.username);
         })
     
