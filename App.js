@@ -70,7 +70,7 @@ const RootStack = createStackNavigator(
 
   },
   {
-    initialRouteName: 'Purchase',
+    initialRouteName: 'Main',
     headerMode: 'screen'
   }
 );

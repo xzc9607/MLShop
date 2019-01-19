@@ -8,8 +8,7 @@ import {
     ScrollView,
     TextInput,
     TouchableWithoutFeedback,
-    FlatList,
-    WebView
+    FlatList
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import Swipercomponent from './../components/swipercomponent';
@@ -23,6 +22,7 @@ const { width } = Dimensions.get('window')//获取当前屏幕宽度
 export default class NewCarpage extends Component {
     static navigationOptions = {
         tabBarLabel: '新车',
+        header: null,
         tabBarIcon: ({ focused, tintColor }) => (
             <Icon name='car' size={25} color="#ffffff" />
         )
@@ -70,8 +70,9 @@ export default class NewCarpage extends Component {
                         </TouchableWithoutFeedback>
                     </View>
                     <View><TextInput
+                        defaultValue={'个性SUV'}
                         style={{ height: 40, width: (width / 4) * 3, backgroundColor: '#f1f1f1', borderRadius: 15, justifyContent: 'center' }}
-                        placeholder={this.state.text}
+                        //placeholder={this.state.text}
                     /></View>
                     <View
                         style={{ justifyContent: 'flex-end', marginStart: 10 }}

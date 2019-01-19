@@ -20,24 +20,9 @@ export default class mySetting extends Component {
         <Indexheader/>
 
         <View>
-            <Text>联系电话</Text>
+            <Text>图标，版本，说明，组员</Text>
         </View>
 
-        <View>
-            <Text>订单内容</Text>
-        </View>
-
-        <View>
-            <Text>预约联系OR到店</Text>
-        </View>
-
-        <View>
-            <Text>付款方式</Text>
-        </View>
-
-        <View>
-            <Text>提交</Text>
-        </View>
 
         
 

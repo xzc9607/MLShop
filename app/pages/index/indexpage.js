@@ -84,8 +84,9 @@ export default class Indexpage extends Component {
                             </TouchableWithoutFeedback>
                         </View>
                         <View><TextInput
+                            defaultValue={'个性SUV'}
                             style={{ height: 40, width: (width / 4) * 3, backgroundColor: '#f1f1f1', borderRadius: 15, justifyContent: 'center' }}
-                            placeholder={this.state.text}
+                            //placeholder={this.state.text}
                         /></View>
                         <View
                             style={{ justifyContent: 'flex-end', marginStart: 10 }}
@@ -108,7 +109,7 @@ export default class Indexpage extends Component {
                         <View style={styles.newcarchooseview}>
                             <View style={styles.newcarchoosebox}><Text style={{ fontSize: 20, color: 'black', marginStart: 10 }}>新车优选</Text></View>
                             <View style={styles.newcarchoosebox2}></View>
-                            <View style={styles.newcarchoosebox}><Text style={{ fontSize: 15, color: '#FF2d16' }}>全部新车</Text></View>
+                            <View style={styles.newcarchoosebox}><TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate('Newcar')}><Text style={{ fontSize: 15, color: '#FF2d16' }}>全部新车</Text></TouchableWithoutFeedback></View>
                         </View>
 
                         <View style={styles.newcarchooseview2}>

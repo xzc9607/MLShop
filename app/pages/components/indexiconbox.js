@@ -5,6 +5,7 @@ import {
     Image,
     StyleSheet,
     Dimensions,
+    TouchableWithoutFeedback,
 
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
@@ -21,9 +22,12 @@ export default class Indexiconbox extends Component {
                 <View style={styles.iconboxview1}>
                     <View style={styles.iconbox}>
                         <View style={styles.ciclebox1}>
-                            <View>
-                                <Icon name='car' size={25} color="#fff" />
-                            </View>
+                            <TouchableWithoutFeedback 
+                            onPress={()=>this.props.navigation.navigate('Newcar')}>
+                                <View>
+                                    <Icon name='car' size={25} color="#fff" />
+                                </View>
+                            </TouchableWithoutFeedback>
                         </View>
                     </View>
 

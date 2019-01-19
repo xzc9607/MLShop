@@ -48,7 +48,7 @@ export default class Minepage extends Component {
             sourceData1: [
                 { key: '我的订单', function: 'MyOrder' },
                 { key: '我的关注', function: 'MyFocus' },
-                { key: '我的咨询', function: 'MyAdvice' }],
+                { key: '我的反馈', function: 'MyAdvice' }],
             sourceData2: [
                 { key: '了解猛龙汽车', function: 'Understanding' },
                 { key: '意见反馈', function: 'FeedBack' },
@@ -117,7 +117,7 @@ export default class Minepage extends Component {
                     </View>
                     <View style={styles.attentionviewinside}>
                         <Text>0</Text>
-                        <Text>我的咨询</Text>
+                        <Text>我的反馈</Text>
                     </View>
                 </View>
                 <View style={{ marginTop: 15 }}></View>
