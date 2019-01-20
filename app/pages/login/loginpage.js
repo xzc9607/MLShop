@@ -12,7 +12,7 @@ export default class Login extends Component {
         super(props, context);
         this.state = { 
             username: '' ,
-            password:''
+            password:'',
 
         };
     }
@@ -45,7 +45,7 @@ export default class Login extends Component {
     login() {
         let formData = {
           "username":this.state.username,
-          "password":this.state.password
+          "password":this.state.password,
         }
       
         fetch(gUrl.httpurl+'/login',

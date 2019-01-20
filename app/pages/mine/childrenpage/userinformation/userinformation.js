@@ -3,6 +3,7 @@ import { Text, View, Image, Dimensions } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import Minepageheader from './../../../components/minepageheader';
 import { AsyncStorage } from "react-native";
+import Global from './../../../Global';
 
 
 
@@ -12,20 +13,32 @@ export default class userInformation extends Component {
     constructor(props) {
         super(props);
         this.state={
-            username:''
+            username:'',
+            number:''
         }
 
         AsyncStorage.getItem('user', function (error, result) {
             if (error) {
                 alert('读取失败')
             }else {
-                console.log(result)
+                //console.log(result)
                 //JSON.parse(result);
             }
         }).then(result=>{
             this.setState({'username':result});
             console.log(this.state.username);
+            fetch(gUrl.localurl+'/finduserbyname?username='+this.state.username)
+            .then((response) => {
+              this.res=JSON.parse(response._bodyText);
+              //console.log(this.res);
+              this.setState({number:this.res[0].number});
+            })
+            .catch((error) => {
+              console.log(error)
+            })
         })
+
+        
     
     }
 
@@ -87,7 +100,7 @@ export default class userInformation extends Component {
                         <View style={{ width: (width - 40) / 4 }}><Text style={{ fontSize: 15, color: 'black' }}>手机号</Text></View>
                         <View style={{ width: (width - 40) / 4 * 2,alignItems:'center' }}>
                             <View>
-                                <Text>{this.state.username}</Text>
+                                <Text>{this.state.number}</Text>
                             </View>
 
                         </View>
