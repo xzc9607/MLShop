@@ -93,15 +93,15 @@ export default class NewCarpage extends Component {
                             >
                                 <View style={{ backgroundColor: 'white' }}>
                                     <View style={styles.listtext}>
-                                        <View style={{ width: width / 2, justifyContent: 'center', alignItems: 'center', }}>
+                                        <View style={{ width: 2*width / 5, justifyContent: 'center', alignItems: 'center', }}>
                                             <Image resizeMode='stretch' style={styles.listimage}
                                                 source={require('./../../../static/img/car.jpg')} />
                                         </View>
                                         <View style={styles.listbody}>
-                                            <View style={{ width: width / 2, marginStart: 20 }}>
-                                                <Text style={{ color: 'black', fontSize: 20 }}>{item.brand}</Text>
-                                                <Text style={{ color: 'black', fontSize: 20 }}>{item.model}</Text>
-                                                <Text>厂商指导价{item.guidePrice}万</Text>
+                                            <View style={{ width: 3*width / 5, marginStart: 20 }}>
+                                                <Text style={{ color: 'black', fontSize: 19 }}>{item.brand}</Text>
+                                                <Text style={{ color: 'black', fontSize: 19 }}>{item.model}</Text>
+                                                <Text>厂商指导价{item.guideprice}万</Text>
                                                 <Text style={{ color: '#FF2d16' }}>首付0元 月供6000元</Text>
                                             </View>
 
