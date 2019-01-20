@@ -30,6 +30,7 @@ import Forgetpassword from './app/pages/login/forgetpassword/forgetpasswordpage'
 import userInformation from './app/pages/mine/childrenpage/userinformation/userinformation';
 import Carpage from './app/pages/car/carpage';
 import Purchasepage from './app/pages/purchase/purchasepage';
+import Aboutpage from './app/pages/mine/childrenpage/mySetting/about/aboutpage';
 
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
@@ -61,6 +62,7 @@ const RootStack = createStackNavigator(
     MySetting:{screen:mySetting},
     Understanding:{screen:understanding},
     Purchase:{screen:Purchasepage},
+    About:{screen:Aboutpage},
     Main: {
       screen: TabNav,
       navigationOptions: ({navigation}) => ({

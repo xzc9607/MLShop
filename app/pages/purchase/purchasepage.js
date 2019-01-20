@@ -5,7 +5,7 @@ import Indexheader from './../components/indexheader';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
-export default class mySetting extends Component {
+export default class Purchase extends Component {
   constructor(props){
     super(props);
   }

@@ -34,7 +34,11 @@ export default class mySetting extends Component {
         </View>
         <View style={{ height: 1, backgroundColor: '#cccccc', marginStart: 20 }}></View>
         <View style={{ height: 40, marginStart: 20, justifyContent: 'center' }}>
-          <Text style={{ fontSize: 15, color: 'black' }}>关于猛龙汽车商城</Text>
+          <TouchableWithoutFeedback
+              onPress={()=>{this.props.navigation.navigate('About')}}>
+              <Text style={{ fontSize: 15, color: 'black' }}>关于猛龙汽车商城</Text>
+          </TouchableWithoutFeedback>
+          
         </View>
         <View style={{ height: 1, backgroundColor: '#cccccc' }}></View>
         <View style={{ height: 10, backgroundColor: '#ebebeb' }}></View>
