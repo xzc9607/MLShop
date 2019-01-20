@@ -31,10 +31,22 @@ export default class Carpage extends Component {
         super(props);
         this.state = {
             text: '个性SUV',
-            isOpen: false
+            isOpen: false,
+            data:null
 
         };
-        //console.log(this.props.navigation.state.params.item.brand);
+
+        //findcarbyid
+        fetch(gUrl.localurl+'/findcarbyid?id='+this.props.navigation.state.params.item.id)
+            .then((response) => {
+              this.res=JSON.parse(response._bodyText);
+              this.setState({'data':this.res})
+              //console.log(this.res[209])
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        
 
         
     }
@@ -111,7 +123,7 @@ export default class Carpage extends Component {
                 <View style={{flexDirection: 'row' }}>
                     <View style={{width:width/2}}>
                         <Button
-                            onPress={()=> (alert('待实现'))}
+                            onPress={()=> (console.log(this.state.data))}
                             title="关注该车"
                             color="#ff4d00"
                         />
@@ -119,7 +131,7 @@ export default class Carpage extends Component {
 
                     <View style={{width:width/2}}>
                         <Button
-                            onPress={()=> (alert('待实现'))}
+                            onPress={()=> (this.props.navigation.navigate('Purchase',this.state.data))}
                             title="立刻购买"
                             color="red"
                         />
