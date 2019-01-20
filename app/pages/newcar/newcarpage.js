@@ -38,7 +38,7 @@ export default class NewCarpage extends Component {
         };
 
         //getcarlist
-        fetch(gUrl.localurl+'/getnewcarlist')
+        fetch(gUrl.httpurl+'/getnewcarlist')
             .then((response) => {
               this.res=JSON.parse(response._bodyText);
               this.setState({'carlist':this.res})

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Dimensions, TouchableWithoutFeedback,AsyncStorage,Alert,StyleSheet,Switch,Button,ScrollView} from 'react-native';
+import { Button, Dimensions, Image, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import Indexheader from './../components/indexheader';
 
 

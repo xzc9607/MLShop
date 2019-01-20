@@ -37,7 +37,7 @@ export default class Carpage extends Component {
         };
 
         //findcarbyid
-        fetch(gUrl.localurl+'/findcarbyid?id='+this.props.navigation.state.params.item.id)
+        fetch(gUrl.httpurl+'/findcarbyid?id='+this.props.navigation.state.params.item.id)
             .then((response) => {
               this.res=JSON.parse(response._bodyText);
               this.setState({'data':this.res})

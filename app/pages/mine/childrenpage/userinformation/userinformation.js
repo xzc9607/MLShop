@@ -27,7 +27,7 @@ export default class userInformation extends Component {
         }).then(result=>{
             this.setState({'username':result});
             console.log(this.state.username);
-            fetch(gUrl.localurl+'/finduserbyname?username='+this.state.username)
+            fetch(gUrl.httpurl+'/finduserbyname?username='+this.state.username)
             .then((response) => {
               this.res=JSON.parse(response._bodyText);
               //console.log(this.res);

@@ -1,30 +1,15 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Dimensions,
-    ScrollView,
-    TextInput,
-    TouchableWithoutFeedback,
-    BackHandler,
-    ToastAndroid,
-    Linking,
-    AsyncStorage
-} from 'react-native';
-
-import Icon from "react-native-vector-icons/AntDesign";
+import { AsyncStorage, Dimensions, Image, Linking, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import SideMenu from 'react-native-side-menu';
+import Icon from "react-native-vector-icons/AntDesign";
 import Sidemenucomponent from '../components/sidemenucomponent';
-import Swipercomponent from './../components/swipercomponent';
 import Indexheader from './../components/indexheader';
 import Indexiconbox from './../components/indexiconbox';
 import IndexLabellist from './../components/indexlabellist';
+import Swipercomponent from './../components/swipercomponent';
 
 
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
