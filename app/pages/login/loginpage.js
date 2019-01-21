@@ -10,6 +10,7 @@ export default class Login extends Component {
 
     constructor(props, context) {
         super(props, context);
+        AsyncStorage.clear();
         this.state = { 
             username: '' ,
             password:'',

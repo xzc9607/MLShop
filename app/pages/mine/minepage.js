@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import Minepageheader from './../components/minepageheader';
+import {coerceValue} from 'graphql';
 
 
 //列表分割线
@@ -52,12 +53,13 @@ export default class Minepage extends Component {
             sourceData2: [
                 { key: '了解猛龙汽车', function: 'Understanding' },
                 { key: '意见反馈', function: 'FeedBack' },
-                { key: '帮助中心', function: 'Help' },
+                { key: '测试', function: 'Help' },
                 { key: '设置', function: 'MySetting' }],
             username:'',
             userid:null,
             orderlength:null,
-            focuslength:null
+            focuslength:null,
+            feedbacklength:null
   
         }
 
@@ -97,14 +99,23 @@ export default class Minepage extends Component {
                                 }
                             }
                             //console.log(this.state);
-                            fetch(gUrl.localurl+'/getorderlistlength?userid='+this.state.userid)
+                            fetch(gUrl.httpurl+'/getorderlistlength?userid='+this.state.userid)
                           .then((response) => {
                               //console.log(response._bodyText)
                               this.setState({'orderlength':response._bodyText})
-                              fetch(gUrl.localurl+'/getfocuslistlength?userid='+this.state.userid)
+                              fetch(gUrl.httpurl+'/getfocuslistlength?userid='+this.state.userid)
                           .then((response) => {
                               //console.log(response._bodyText)
                               this.setState({'focuslength':response._bodyText})
+                              fetch(gUrl.httpurl+'/getfeedbacklistlength?userid='+this.state.userid)
+                          .then((response) => {
+                              //console.log(response._bodyText)
+                              this.setState({'feedbacklength':response._bodyText})
+                        
+                      })
+                      .catch((error) => {
+                        console.log(error)
+                      })
                         
                       })
                       .catch((error) => {
@@ -143,6 +154,7 @@ export default class Minepage extends Component {
                             onPress={() => this.props.navigation.navigate('UserInformation')}
                         >
                             <Image
+                                roundAsCircle={true}
                                 style={styles.profilephoto}
                                 source={{uri: 'https://mlshopimg.oss-cn-hangzhou.aliyuncs.com/'+this.state.username+'.png'}} />
                         </TouchableWithoutFeedback>
@@ -150,7 +162,7 @@ export default class Minepage extends Component {
                 </View>
 
                 <View style={styles.nameview}>
-                    <Text>{this.state.username}</Text>
+                    <Text style={{fontSize:16,color:'black'}}>{this.state.username}</Text>
                 </View>
                 <View style={styles.nameview}>
                     <Text>0首付，开新车</Text>
@@ -165,7 +177,7 @@ export default class Minepage extends Component {
                         <Text>关注车辆</Text>
                     </View>
                     <View style={styles.attentionviewinside}>
-                        <Text>0</Text>
+                        <Text>{this.state.feedbacklength}</Text>
                         <Text>我的反馈</Text>
                     </View>
                 </View>
@@ -261,12 +273,14 @@ const styles = StyleSheet.create({
         // 设置高度
         height: 100,
         //resizeMode:'contain'
+
     },
     profilephoto: {
         //头像
-        width: 100, 
-        height: 100,
-        alignItems: 'center'
+        width: 90, 
+        height: 90,
+        alignItems: 'center',
+        borderRadius: 50
     },
     tabBarIcon: {
         width: 21,
