@@ -11,7 +11,8 @@ import {
     BackHandler,
     ToastAndroid,
     Button,
-    Linking
+    Linking,
+    AsyncStorage
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import SideMenu from 'react-native-side-menu';
@@ -32,7 +33,8 @@ export default class Carpage extends Component {
         this.state = {
             text: '个性SUV',
             isOpen: false,
-            data:null
+            data:null,
+            userid:''
 
         };
 
@@ -46,10 +48,25 @@ export default class Carpage extends Component {
             .catch((error) => {
               console.log(error)
             })
+
+            AsyncStorage.getItem('userid', function (error, result) {
+                if (error) {
+                    alert('读取失败')
+                }else {
+                    console.log(result)
+                    //JSON.parse(result);
+                }
+            }).then(result=>{
+                this.setState({'userid':result});
+                
+            })
+        
         
 
         
     }
+
+    addfocus(){}
 
     
 

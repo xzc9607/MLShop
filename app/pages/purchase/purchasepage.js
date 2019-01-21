@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Dimensions, Image, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { Button, Dimensions, Image, ScrollView, StyleSheet, Switch, Text, View,AsyncStorage,Alert } from 'react-native';
 import Indexheader from './../components/indexheader';
 
 
@@ -13,12 +13,71 @@ export default class Purchase extends Component {
       falseSwitchIsOn1: false,
       trueSwitchIsOn2: true,
       falseSwitchIsOn2: false,
+      username:'',
+      userid:null
     }
-  }
+
+    AsyncStorage.getItem('user', function (error, result) {
+      if (error) {
+          alert('读取失败')
+      }else {
+          //console.log(result)
+          //JSON.parse(result);
+      }
+  }).then(result=>{
+      this.setState({'username':result});
+      fetch(gUrl.httpurl+'/getuserlist')
+                .then((response) => {
+                  this.res=JSON.parse(response._bodyText);
+                  console.log(this.res);
+                  for(var i=0;i<this.res.length;i++){
+                      if(this.res[i].username==this.state.username){
+                        this.setState({userid:this.res[i].id});
+                      }
+                  }
+                  //console.log(this.state.userid);
+                })
+                .catch((error) => {
+                  console.log(error)
+                })
+
+  })
+}
+
   static navigationOptions = {
     header: null,
 
   };
+
+  add(){
+    let formData = {
+      "userid":this.state.userid,
+      "carid":this.props.navigation.state.params[0].id
+    }
+    console.log(formData);
+  
+    fetch(gUrl.httpurl+'/addorder',
+    {
+       method:"POST",   //请求方法
+       mode: "cors",
+       body:JSON.stringify(formData),   //请求体
+  　　　　headers: {
+  　　　　'Accept': 'application/json',
+  　　　　'Content-Type': 'application/json',
+  　　　　 }})
+        .then((response) => {
+          res=JSON.parse(response._bodyText)
+          if(res.code==201){
+            Alert.alert('提交成功')
+            
+          }else{
+              alert(res.msg)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+  }
 
   render() {
     return (
@@ -100,7 +159,7 @@ export default class Purchase extends Component {
         </ScrollView>
         <View>
           <Button
-            onPress={()=> (console.log(this.props.navigation.state.params[0]))}
+            onPress={()=> this.add()}
             title="提交订单"
             color="red"/>
         </View>
