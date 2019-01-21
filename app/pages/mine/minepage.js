@@ -54,11 +54,29 @@ export default class Minepage extends Component {
                 { key: '意见反馈', function: 'FeedBack' },
                 { key: '帮助中心', function: 'Help' },
                 { key: '设置', function: 'MySetting' }],
-            username:''
+            username:'',
+            userid:null,
+            orderlength:null,
+            focuslength:null
   
         }
 
 
+
+            // AsyncStorage.getItem('user', function (error, result) {
+            //     if (error) {
+            //         alert('读取失败')
+            //     }else {
+            //         //console.log(result)
+            //         //JSON.parse(result);
+            //     }
+            // }).then(result=>{
+            //     this.setState({'username':result});
+            //     //console.log(this.state.username);
+            // }).catch(function(error) {
+            //     console.log('There has been a problem with your fetch operation: ');
+
+            //     })
 
             AsyncStorage.getItem('user', function (error, result) {
                 if (error) {
@@ -69,11 +87,42 @@ export default class Minepage extends Component {
                 }
             }).then(result=>{
                 this.setState({'username':result});
-                //console.log(this.state.username);
-            }).catch(function(error) {
-                console.log('There has been a problem with your fetch operation: ');
+                fetch(gUrl.httpurl+'/getuserlist')
+                          .then((response) => {
+                            this.res=JSON.parse(response._bodyText);
+                            //console.log(this.res);
+                            for(var i=0;i<this.res.length;i++){
+                                if(this.res[i].username==this.state.username){
+                                  this.setState({userid:this.res[i].id});
+                                }
+                            }
+                            //console.log(this.state);
+                            fetch(gUrl.localurl+'/getorderlistlength?userid='+this.state.userid)
+                          .then((response) => {
+                              //console.log(response._bodyText)
+                              this.setState({'orderlength':response._bodyText})
+                              fetch(gUrl.localurl+'/getfocuslistlength?userid='+this.state.userid)
+                          .then((response) => {
+                              //console.log(response._bodyText)
+                              this.setState({'focuslength':response._bodyText})
+                        
+                      })
+                      .catch((error) => {
+                        console.log(error)
+                      })
+                        
+                      })
+                      .catch((error) => {
+                        console.log(error)
+                      })
+                          })
+                          .catch((error) => {
+                            console.log(error)
+                          })
+          
+            })
 
-                })
+            
 
 
     }
@@ -108,12 +157,12 @@ export default class Minepage extends Component {
                 </View>
                 <View style={styles.attentionview}>
                     <View style={styles.attentionviewinside}>
-                        <Text>0</Text>
-                        <Text>关注车辆</Text>
+                        <Text>{this.state.orderlength}</Text>
+                        <Text>车辆订单</Text>
                     </View>
                     <View style={styles.attentionviewinside}>
-                        <Text>0</Text>
-                        <Text>关注门店</Text>
+                        <Text>{this.state.focuslength}</Text>
+                        <Text>关注车辆</Text>
                     </View>
                     <View style={styles.attentionviewinside}>
                         <Text>0</Text>

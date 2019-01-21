@@ -91,7 +91,6 @@ export default class myFocusCar extends Component {
             </View>
             <View style={{ width: width / 3 }}>
               <Text>{item.model}</Text>
- 
             </View>
             <View style={{ width: width / 3, justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: width / 5, height: 25, backgroundColor: 'red', borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}><Text style={{ color: 'white' }}>取消关注</Text></View>
