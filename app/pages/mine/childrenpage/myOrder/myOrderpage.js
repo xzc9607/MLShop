@@ -35,13 +35,13 @@ export default class myOrder extends Component {
                       }
                   }
                   //console.log(this.state);
-                  fetch(gUrl.httpurl+'/getorderlistbyuserid?userid='+2)
+                  fetch(gUrl.httpurl+'/getorderlistbyuserid?userid='+this.state.userid)
                 .then((response) => {
                     this.res=JSON.parse(response._bodyText);
                     this.setState({'data':this.res})
                     console.log(this.state.data)
                     for(var j=0;j<this.state.data.length;j++){
-                      fetch(gUrl.httpurl+'//findcarbyid?id='+this.state.data[j].carid)
+                      fetch(gUrl.httpurl+'/findcarbyid?id='+this.state.data[j].carid)
                       .then((response) => {
                         this.res=JSON.parse(response._bodyText);
                         this.car.push(this.res[0])
