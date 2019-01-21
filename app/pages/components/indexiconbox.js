@@ -14,6 +14,9 @@ const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 
 export default class Indexiconbox extends Component {
+    constructor(props){
+        super(props);
+    }
 
 
     render() {
@@ -23,7 +26,7 @@ export default class Indexiconbox extends Component {
                     <View style={styles.iconbox}>
                         <View style={styles.ciclebox1}>
                             <TouchableWithoutFeedback 
-                            onPress={()=>this.props.navigation.navigate('Newcar')}>
+                            >
                                 <View>
                                     <Icon name='car' size={25} color="#fff" />
                                 </View>

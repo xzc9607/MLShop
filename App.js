@@ -31,6 +31,7 @@ import userInformation from './app/pages/mine/childrenpage/userinformation/useri
 import Carpage from './app/pages/car/carpage';
 import Purchasepage from './app/pages/purchase/purchasepage';
 import Aboutpage from './app/pages/mine/childrenpage/mySetting/about/aboutpage';
+import Searchpage from './app/pages/search/searchpage';
 
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
@@ -63,6 +64,7 @@ const RootStack = createStackNavigator(
     Understanding:{screen:understanding},
     Purchase:{screen:Purchasepage},
     About:{screen:Aboutpage},
+    Search:{screen:Searchpage},
     Main: {
       screen: TabNav,
       navigationOptions: ({navigation}) => ({

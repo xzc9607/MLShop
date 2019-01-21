@@ -68,11 +68,11 @@ export default class Indexpage extends Component {
                                 <Text style={{ justifyContent: 'center' }} >店铺<Icon name='down' size={15} color="#000" /></Text>
                             </TouchableWithoutFeedback>
                         </View>
-                        <View><TextInput
-                            defaultValue={'个性SUV'}
-                            style={{ height: 40, width: (width / 4) * 3, backgroundColor: '#f1f1f1', borderRadius: 15, justifyContent: 'center' }}
-                            //placeholder={this.state.text}
-                        /></View>
+                        <TouchableWithoutFeedback  onPress={() => this.props.navigation.navigate('Search')}>
+                        <View style={{ height: 35, width: (width / 4) * 3, backgroundColor: '#f1f1f1', borderRadius: 15, justifyContent: 'center',alignItems:'center' }}>
+                            <View style={{flexDirection:'row'}}><Icon name='search1' size={15} color="#000" /><Text>搜索</Text></View>
+                        </View>
+                        </TouchableWithoutFeedback>
                         <View
                             style={{ justifyContent: 'flex-end', marginStart: 10 }}
                         ><TouchableWithoutFeedback  onPress={() => this.getnumber()}><Icon name='phone' size={20} color="#000" /></TouchableWithoutFeedback></View>
@@ -97,18 +97,6 @@ export default class Indexpage extends Component {
                             <View style={styles.newcarchoosebox}><TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate('Newcar')}><Text style={{ fontSize: 15, color: '#FF2d16' }}>全部新车</Text></TouchableWithoutFeedback></View>
                         </View>
 
-                        <View style={styles.newcarchooseview2}>
-                            <View style={styles.newcarchoosebox}><Text style={{ color: 'black' }}>北汽新..</Text></View>
-                            <View style={styles.newcarchoosebox}><Text style={{ color: 'black' }}>广汽乘..</Text></View>
-                            <View style={styles.newcarchoosebox}><Text style={{ color: 'black' }}>江铃汽车</Text></View>
-                            <View style={styles.newcarchoosebox}><Text style={{ color: 'black' }}>东风日产</Text></View>
-                        </View>
-                        <View style={styles.newcarchooseview2}>
-                            <View style={styles.newcarchoosebox}><Text style={{ color: 'black' }}>10万以下</Text></View>
-                            <View style={styles.newcarchoosebox}><Text style={{ color: 'black' }}>10万-20万</Text></View>
-                            <View style={styles.newcarchoosebox}><Text style={{ color: 'black' }}>20万-30万</Text></View>
-                            <View style={styles.newcarchoosebox}><Text style={{ color: 'black' }}>30万-40万</Text></View>
-                        </View>
                         <View style={styles.newcarchooseview3}>
                             <View style={styles.newcarchoosebox}><Text style={styles.newcarchooseview3text}>0首付</Text></View>
                             <View style={styles.newcarchoosebox}><Text style={styles.newcarchooseview3text}>买车可赚钱</Text></View>
@@ -128,58 +116,8 @@ export default class Indexpage extends Component {
                     
                         <View style={{ height: 5, backgroundColor: '#ebebeb' }}></View>
 
-                        <View style={{ height: 80, backgroundColor: '#ebebeb', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                            <View style={{ width: width / 3, justifyContent: 'center', alignItems: 'center' }}><View style={{ width: 60, height: 1, backgroundColor: 'gray' }}></View></View>
-                            <View style={{ width: width / 3, justifyContent: 'center', alignItems: 'center' }}>
-                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                                    <Icon name='star' size={25} color="#FF2d16" />
-                                    <Text style={{ color: 'black', fontSize: 18 }}>品牌专区</Text>
-                                </View>
-                            </View>
-                            <View style={{ width: width / 3, justifyContent: 'center', alignItems: 'center' }}><View style={{ width: 60, height: 1, backgroundColor: 'gray' }}></View></View>
-                        </View>
 
-                        <View style={{ backgroundColor: 'white', height: 220 }}>
-                            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                                <Image
-                                    resizeMode='stretch' style={styles.listimage2}
-                                    source={require('./../../../static/img/car.jpg')} />
-                            </View>
-                            <View style={{ marginStart: 20 }}>
-                                <Text style={{ color: 'black', fontSize: 15 }}>北汽新能源</Text>
-                                <Text>新一代北汽新能源汽车，其优点...</Text>
-                            </View>
-                        </View>
-                        <View style={{ height: 5, backgroundColor: '#ebebeb' }}></View>
-
-                        <View style={{ backgroundColor: 'white', height: 220, justifyContent: 'center', alignItems: 'center' }}>
-                            <View style={styles.zero2}>
-                                <View style={styles.zerobox2}>
-                                    <View><View style={{ backgroundColor: 'white', height: 30, width: 30 }}></View></View>
-                                    <View style={{ width: (width / 10) * 4, marginStart: 20 }}>
-                                        <Text style={{ fontSize: 17, color: 'white' }}>北汽新能源</Text>
-                                        <Text style={{ fontSize: 12, color: 'white' }}>新能源汽车开回家</Text>
-                                    </View>
-                                    <View style={{ width: (width / 5), height: 30, backgroundColor: '#ffa500', borderRadius: 10, justifyContent: 'center', alignItems: 'center', }}><Text style={{ fontSize: 15, color: '#fff' }}>更多车型</Text></View>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ height: 5, backgroundColor: '#ebebeb' }}></View>
-                        <View style={{ backgroundColor: 'white', height: 220 }}>
-                            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
-                                <Image
-                                    resizeMode='stretch' style={styles.listimage2}
-                                    source={require('./../../../static/img/car.jpg')} />
-                            </View>
-                            <View style={{ marginStart: 20 }}>
-                                <Text style={{ color: 'black', fontSize: 15 }}>北汽新能源</Text>
-                                <Text>新一代北汽新能源汽车，其优点...</Text>
-                            </View>
-                        </View>
-
-
-
-
+                
                     </ScrollView>
                 </View>
 

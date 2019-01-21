@@ -1,109 +1,84 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Dimensions,
-    ScrollView,
-    TextInput,
-    TouchableWithoutFeedback,
-    FlatList,
-    AsyncStorage,
-    Linking
-} from 'react-native';
-import Icon from "react-native-vector-icons/AntDesign";
-import Swipercomponent from './../components/swipercomponent';
+import { Text, View,TouchableWithoutFeedback,Dimensions,TextInput,Alert,FlatList,StyleSheet,Image} from 'react-native';
 import Indexheader from './../components/indexheader';
-import Global from '../Global';
+import Icon from "react-native-vector-icons/AntDesign";
+
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 
 
 
-export default class NewCarpage extends Component {
+
+export default class search extends Component {
     static navigationOptions = {
-        tabBarLabel: '新车',
-        header: null,
-        tabBarIcon: ({ focused, tintColor }) => (
-            <Icon name='car' size={25} color="#ffffff" />
-        )
+        header:null
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            text: '个性SUV',
-            isOpen: false,
-            carlist:[]
-
-        };
-
-        //getcarlist
-        fetch(gUrl.httpurl+'/getnewcarlist')
-            .then((response) => {
-              this.res=JSON.parse(response._bodyText);
-              this.setState({'carlist':this.res})
-              //console.log(this.res[209])
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-
+  constructor(props){
+    super(props);
+    this.state={
+        data:'',
+        content:null,
+        car:[]
     }
 
-    getnumber(){
-        //拨打选中店铺电话
-        AsyncStorage.getItem('number', function (error, result) {
-            if (error) {
-                alert('读取失败')
-            }else {
-                //console.log(result)
-                //JSON.parse(result);
-            }
-        }).then(result=>{
-            Linking.openURL('tel:${'+ result +'}')
-        })
-           
+    fetch(gUrl.httpurl+'/getcarlist')
+                .then((response) => {
+                    this.res=JSON.parse(response._bodyText);
+                    this.setState({'content':this.res})
+                })
+                .catch((error) => {
+                  console.log(error)
+                })
+
+  }
+
+  search(){
+    this.car=[];
+    for(var i=0;i<this.state.content.length;i++){
+        //如果字符串中不包含目标字符会返回-1
+        if(this.state.content[i].model.indexOf(this.state.data)>=0){
+            this.car.push(this.state.content[i]);
+        }else{
+
+        }
     }
-
-
-    render() {
-        return (
-            //头部
-            <View style={styles.container}>
-                <Indexheader />
-
-                <View style={{ height: 45, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
-                        <View
-                            style={{ justifyContent: 'flex-start' }}
-                        >
-                            <TouchableWithoutFeedback onPress={() => {
-                                this.setState({
-                                    isOpen: true
-                                })
-                            }}>
-                                <Text style={{ justifyContent: 'center' }} >店铺<Icon name='down' size={15} color="#000" /></Text>
-                            </TouchableWithoutFeedback>
-                        </View>
+    this.setState({'car':this.car})
+    if(this.state.car==[]){
+        Alert.alert('没有搜索到相关记录')
+    }
+    console.log(this.car);
+  }
+  
+  
+  render() {
+    return (
+      <View style={{flex:1}}>
+      <Indexheader/>
+      <View style={{ height: 50, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
+                       
                         <TouchableWithoutFeedback  onPress={() => this.props.navigation.navigate('Search')}>
                         <View style={{ height: 35, width: (width / 4) * 3, backgroundColor: '#f1f1f1', borderRadius: 15, justifyContent: 'center',alignItems:'center' }}>
-                            <View style={{flexDirection:'row'}}><Icon name='search1' size={15} color="#000" /><Text>搜索</Text></View>
+                            <TextInput
+                                style={{height: 35, width: (width / 4) * 3, backgroundColor: '#f1f1f1', borderRadius: 15, justifyContent: 'center',alignItems:'center'}} 
+                                placeholder={'请输入需要搜索的内容'}
+                                onChangeText={(data) => this.setState({data})}
+                            />
                         </View>
                         </TouchableWithoutFeedback>
                         <View
                             style={{ justifyContent: 'flex-end', marginStart: 10 }}
-                        ><TouchableWithoutFeedback  onPress={() => this.getnumber()}><Icon name='phone' size={20} color="#000" /></TouchableWithoutFeedback></View>
+                        ><TouchableWithoutFeedback  onPress={() => this.search()}><Text><Icon name='search1' size={15} color="#000" />搜索</Text></TouchableWithoutFeedback></View>
                     </View>
-                <ScrollView>
-                    <View style={styles.swiperview}>
-                        <Swipercomponent />
-                    </View>
-
-                    <View style={{ marginTop: 15, backgroundColor: 'white' }}></View>
 
                     <FlatList
-                        data={this.state.carlist}
+                        data={this.state.car}
+                        ListEmptyComponent={(
+                            <View style={{justifyContent:'center',alignItems:'center',marginTop:200}}><Text style={{fontSize:30}}>空空如也</Text></View>
+
+                    
+                            
+                        )}
                         renderItem={({ item }) =>
                             <TouchableWithoutFeedback
                                 onPress={() => this.props.navigation.navigate('CarPage',{item})}
@@ -128,18 +103,12 @@ export default class NewCarpage extends Component {
                             </TouchableWithoutFeedback>
                         } />
 
-                        
-
-                    
-
-                </ScrollView>
-            </View>
-
-
-
-        );
-    }
+        
+      </View>
+    );
+  }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
