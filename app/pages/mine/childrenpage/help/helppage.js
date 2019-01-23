@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import Button from 'react-native-button';
-import Minepageheader from './../../../components/minepageheader';
-import { AsyncStorage } from "react-native";
-
-
-
-import { Query } from "react-apollo";
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-import gql from "graphql-tag";
-
+import Global from '../Global';
 
 export default class help extends Component {
   constructor(props){
@@ -1381,8 +1372,6 @@ export default class help extends Component {
       
     }
     this.a=[];
-    
-    
   }
   
   get(){

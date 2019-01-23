@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { Text, View,TouchableWithoutFeedback,Dimensions,TextInput,Alert,FlatList,StyleSheet,Image} from 'react-native';
 import Indexheader from './../components/indexheader';
 import Icon from "react-native-vector-icons/AntDesign";
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
-
-
-
-
 export default class search extends Component {
+
     static navigationOptions = {
         header:null
     };
@@ -21,7 +19,6 @@ export default class search extends Component {
         content:null,
         car:[]
     }
-
     fetch(gUrl.httpurl+'/getcarlist')
                 .then((response) => {
                     this.res=JSON.parse(response._bodyText);
@@ -113,8 +110,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        //justifyContent: 'center',
-        //alignItems: 'stretch',
     },
     center: {
         height: 45,
@@ -124,9 +119,7 @@ const styles = StyleSheet.create({
 
     },
     center2: {
-        //height: 45,
         backgroundColor: 'white',
-        //flexDirection: 'row',
         alignItems: 'center',
         marginTop: -5
 
@@ -143,14 +136,9 @@ const styles = StyleSheet.create({
         color: 'black',
         marginTop: 10,
         marginStart: 5
-        //marginRight:-40
     },
     text2: {
         fontSize: 11,
-        //color: 'black',
-        //marginTop: 10,
-        //marginStart:5
-        //marginRight:-40
     },
     tabBarIcon: {
         width: 21,
@@ -206,8 +194,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF2d16',
         borderRadius: 10,
         flexDirection: 'row',
-
-
     },
     listtext: {
         height: 130,

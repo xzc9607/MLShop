@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-} from 'react-native';
-
+import { Image, Text, View } from 'react-native';
+import Global from '../Global';
 
 export default class Minepageheader extends Component {
-
-
     render() {
         return (
             <View style={{ height: 45, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center' }} >
@@ -19,8 +13,5 @@ export default class Minepageheader extends Component {
                     <Text style={{ fontSize: 20, color: 'black', marginTop: 10, marginStart: 30 }}>猛龙汽车商城</Text>
                 </View>
         );
-
-
     }
-
 }

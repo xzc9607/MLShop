@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Image, Dimensions ,AsyncStorage,FlatList} from 'react-native';
 import Minepageheader from './../../../components/minepageheader';
-
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
@@ -20,21 +20,18 @@ export default class myOrder extends Component {
       if (error) {
           alert('读取失败')
       }else {
-          //console.log(result)
-          //JSON.parse(result);
+
       }
   }).then(result=>{
       this.setState({'username':result});
       fetch(gUrl.httpurl+'/getuserlist')
                 .then((response) => {
                   this.res=JSON.parse(response._bodyText);
-                  //console.log(this.res);
                   for(var i=0;i<this.res.length;i++){
                       if(this.res[i].username==this.state.username){
                         this.setState({userid:this.res[i].id});
                       }
                   }
-                  //console.log(this.state);
                   fetch(gUrl.httpurl+'/getorderlistbyuserid?userid='+this.state.userid)
                 .then((response) => {
                     this.res=JSON.parse(response._bodyText);
@@ -45,8 +42,6 @@ export default class myOrder extends Component {
                       .then((response) => {
                         this.res=JSON.parse(response._bodyText);
                         this.car.push(this.res[0])
-                        
-                  //console.log(this.state.userid);
                 })
                 .catch((error) => {
                   console.log(error)
@@ -63,22 +58,17 @@ export default class myOrder extends Component {
                 })
 
   })
-
-    
   }
 
   static navigationOptions = {
     header: null,
-
   };
 
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Minepageheader/>
-
         <View style={{ height: 50, width: width, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}><Text style={{ color: 'black', fontSize: 18 }}>我的订单</Text></View>
-
           <FlatList
             data={this.car}
             renderItem={({item}) => 
@@ -105,9 +95,6 @@ export default class myOrder extends Component {
             </View>
           </View>
           }/>
-
-        
-
       </View>
     );
   }

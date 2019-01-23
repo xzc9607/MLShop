@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Button, Dimensions, Image, ScrollView, StyleSheet, Switch, Text, View,AsyncStorage,Alert } from 'react-native';
 import Indexheader from './../components/indexheader';
-
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 export default class Purchase extends Component {
   constructor(props){
     super(props);
+
     this.state={
       trueSwitchIsOn1: true,
       falseSwitchIsOn1: false,
@@ -21,8 +22,7 @@ export default class Purchase extends Component {
       if (error) {
           alert('读取失败')
       }else {
-          //console.log(result)
-          //JSON.parse(result);
+
       }
   }).then(result=>{
       this.setState({'username':result});
@@ -35,18 +35,15 @@ export default class Purchase extends Component {
                         this.setState({userid:this.res[i].id});
                       }
                   }
-                  //console.log(this.state.userid);
                 })
                 .catch((error) => {
                   console.log(error)
                 })
-
   })
 }
 
   static navigationOptions = {
     header: null,
-
   };
 
   add(){
@@ -54,8 +51,6 @@ export default class Purchase extends Component {
       "userid":this.state.userid,
       "carid":this.props.navigation.state.params[0].id
     }
-    console.log(formData);
-  
     fetch(gUrl.httpurl+'/addorder',
     {
        method:"POST",   //请求方法
@@ -68,8 +63,7 @@ export default class Purchase extends Component {
         .then((response) => {
           res=JSON.parse(response._bodyText)
           if(res.code==201){
-            Alert.alert('提交成功')
-            
+            Alert.alert('提交成功') 
           }else{
               alert(res.msg)
           }
@@ -149,13 +143,6 @@ export default class Purchase extends Component {
             </View>
           </View>
         </View>
-
-        
-
-        
-
-        
-
         </ScrollView>
         <View>
           <Button
@@ -172,8 +159,6 @@ const styles = StyleSheet.create({
   container: {
       flex: 1,
       flexDirection: 'column',
-      //justifyContent: 'center',
-      //alignItems: 'stretch',
   },
   center: {
       height: 45,
@@ -183,9 +168,7 @@ const styles = StyleSheet.create({
 
   },
   center2: {
-      //height: 45,
       backgroundColor: 'white',
-      //flexDirection: 'row',
       alignItems: 'center',
       marginTop: -5
 
@@ -202,14 +185,9 @@ const styles = StyleSheet.create({
       color: 'black',
       marginTop: 10,
       marginStart: 5
-      //marginRight:-40
   },
   text2: {
       fontSize: 11,
-      //color: 'black',
-      //marginTop: 10,
-      //marginStart:5
-      //marginRight:-40
   },
   tabBarIcon: {
       width: 21,
@@ -255,7 +233,6 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-
   },
   zerobox: {
       justifyContent: 'center',
@@ -265,8 +242,6 @@ const styles = StyleSheet.create({
       backgroundColor: '#FF2d16',
       borderRadius: 10,
       flexDirection: 'row',
-
-
   },
   listtext: {
       height: 130,

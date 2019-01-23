@@ -1,13 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
 import { createStackNavigator,createAppContainer } from 'react-navigation'; // Version can be specified in package.json
 
 import Login from './app/pages/login/loginpage';
@@ -93,6 +84,5 @@ export default class App extends React.Component {
   }
 }
 
-//export default App;
 
 

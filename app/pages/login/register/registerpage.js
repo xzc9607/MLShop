@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, Dimensions } from 'react-native';
+import { Dimensions, Text, TextInput, View } from 'react-native';
 import Button from 'react-native-button';
-import Global from '../../Global'
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
-
 export default class Register extends Component {
+
     constructor(props, context) {
         super(props, context);
         this.state = { 
             username: '' ,
-            password:''
-
+            password:'',
+            number:''
         };
     }
+
     static navigationOptions = {
         title: '注册',
     };
 
+    //注册
     register() {
         let formData = {
           "username":this.state.username,
-          "password":this.state.password
+          "password":this.state.password,
+          "number":this.state.username
         }
       
         fetch(gUrl.httpurl+'/register',

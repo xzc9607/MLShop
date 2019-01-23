@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Dimensions } from 'react-native';
+import { AsyncStorage, Dimensions, Image, Text, View } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import Minepageheader from './../../../components/minepageheader';
-import { AsyncStorage } from "react-native";
-import Global from './../../../Global';
-
-
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 export default class userInformation extends Component {
     constructor(props) {
         super(props);
+
         this.state={
             username:'',
             number:''
@@ -21,8 +19,7 @@ export default class userInformation extends Component {
             if (error) {
                 alert('读取失败')
             }else {
-                //console.log(result)
-                //JSON.parse(result);
+
             }
         }).then(result=>{
             this.setState({'username':result});
@@ -30,21 +27,16 @@ export default class userInformation extends Component {
             fetch(gUrl.httpurl+'/finduserbyname?username='+this.state.username)
             .then((response) => {
               this.res=JSON.parse(response._bodyText);
-              //console.log(this.res);
               this.setState({number:this.res[0].number});
             })
             .catch((error) => {
               console.log(error)
             })
         })
-
-        
-    
     }
 
     static navigationOptions = {
         header: null,
-
     };
 
     render() {

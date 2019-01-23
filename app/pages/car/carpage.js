@@ -1,25 +1,9 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Dimensions,
-    ScrollView,
-    TextInput,
-    TouchableWithoutFeedback,
-    BackHandler,
-    ToastAndroid,
-    Button,
-    Linking,
-    AsyncStorage
-} from 'react-native';
-import Icon from "react-native-vector-icons/AntDesign";
-import SideMenu from 'react-native-side-menu';
-import Swiper from 'react-native-swiper';
+import { AsyncStorage, Button, Dimensions, Linking, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { WebView } from "react-native-webview";
 import Indexheader from './../components/indexheader';
 import Swipercomponent from './../components/swipercomponent';
-import { WebView } from "react-native-webview";
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
@@ -38,12 +22,11 @@ export default class Carpage extends Component {
 
         };
 
-        //findcarbyid
+        //通过传入的车辆ID获取车辆信息
         fetch(gUrl.httpurl+'/findcarbyid?id='+this.props.navigation.state.params.item.id)
             .then((response) => {
               this.res=JSON.parse(response._bodyText);
               this.setState({'data':this.res})
-              //console.log(this.res[209])
             })
             .catch((error) => {
               console.log(error)
@@ -54,7 +37,6 @@ export default class Carpage extends Component {
                     alert('读取失败')
                 }else {
                     console.log(result)
-                    //JSON.parse(result);
                 }
             }).then(result=>{
                 this.setState({'userid':result});
@@ -66,7 +48,35 @@ export default class Carpage extends Component {
         
     }
 
-    addfocus(){}
+    //添加关注车辆
+    addfocus(){
+        let formData = {
+            "userid":this.state.userid,
+            "carid":this.state.data[0].id
+          }
+
+          fetch(gUrl.httpurl+'/addfocuscar',
+          {
+             method:"POST",   //请求方法
+             mode: "cors",
+             body:JSON.stringify(formData),   //请求体
+        　　　　headers: {
+        　　　　'Accept': 'application/json',
+        　　　　'Content-Type': 'application/json',
+        　　　　 }})
+              .then((response) => {
+                res=JSON.parse(response._bodyText)
+                if(res.code==201){
+                  Alert.alert('关注成功')
+                  
+                }else{
+                    alert(res.msg)
+                }
+              })
+              .catch((error) => {
+                console.log(error)
+              })
+    }
 
     
 
@@ -131,16 +141,11 @@ export default class Carpage extends Component {
                         style={{height:7800}}
                         />
 
-                    
-
-
-
-
                 </ScrollView>
                 <View style={{flexDirection: 'row' }}>
                     <View style={{width:width/2}}>
                         <Button
-                            onPress={()=> (console.log(this.state.data))}
+                            onPress={()=> this.addfocus()}
                             title="关注该车"
                             color="#ff4d00"
                         />
@@ -165,8 +170,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        //justifyContent: 'center',
-        //alignItems: 'stretch',
     },
     center: {
         height: 45,
@@ -176,9 +179,7 @@ const styles = StyleSheet.create({
 
     },
     center2: {
-        //height: 45,
         backgroundColor: 'white',
-        //flexDirection: 'row',
         alignItems: 'center',
         marginTop: -5
 
@@ -195,14 +196,9 @@ const styles = StyleSheet.create({
         color: 'black',
         marginTop: 10,
         marginStart: 5
-        //marginRight:-40
     },
     text2: {
         fontSize: 11,
-        //color: 'black',
-        //marginTop: 10,
-        //marginStart:5
-        //marginRight:-40
     },
     tabBarIcon: {
         width: 21,

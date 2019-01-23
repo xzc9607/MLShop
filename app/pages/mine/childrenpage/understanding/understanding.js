@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, Image, Dimensions, ScrollView } from 'react-native';
 import Minepageheader from './../../../components/minepageheader';
-
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 export default class understanding extends Component {
   static navigationOptions = {
     header: null,
-
   };
 
   render() {
@@ -55,8 +54,6 @@ export default class understanding extends Component {
             source={require('./../../../../../static/img/understanding/9.png')}
           />
         </ScrollView>
-
-
       </View>
     );
   }

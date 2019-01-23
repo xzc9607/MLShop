@@ -1,22 +1,8 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Dimensions,
-    FlatList,
-    TouchableOpacity,
-    Alert,
-    TouchableWithoutFeedback,
-    BackHandler,
-    ToastAndroid,
-    AsyncStorage
-} from 'react-native';
+import { AsyncStorage, Dimensions, FlatList, Image, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
 import Minepageheader from './../components/minepageheader';
-import {coerceValue} from 'graphql';
-
+import Global from '../Global';
 
 //列表分割线
 class ItemDivideComponent extends Component {
@@ -27,15 +13,12 @@ class ItemDivideComponent extends Component {
     }
 };
 
-
 export default class Minepage extends Component {
     static navigationOptions = {
         tabBarLabel: '个人',
         tabBarIcon: ({ focused, tintColor }) => (
             <Icon name='user' size={25} color="#ffffff" />
         )
-        
-
     };
     
     constructor(props) {
@@ -43,7 +26,6 @@ export default class Minepage extends Component {
         ()=>{
             this.props.navigation.setParams({abc: 'Updated!'})
         }
-
 
         this.state = {
             sourceData1: [
@@ -63,53 +45,30 @@ export default class Minepage extends Component {
   
         }
 
-
-
-            // AsyncStorage.getItem('user', function (error, result) {
-            //     if (error) {
-            //         alert('读取失败')
-            //     }else {
-            //         //console.log(result)
-            //         //JSON.parse(result);
-            //     }
-            // }).then(result=>{
-            //     this.setState({'username':result});
-            //     //console.log(this.state.username);
-            // }).catch(function(error) {
-            //     console.log('There has been a problem with your fetch operation: ');
-
-            //     })
-
             AsyncStorage.getItem('user', function (error, result) {
                 if (error) {
                     alert('读取失败')
                 }else {
-                    //console.log(result)
-                    //JSON.parse(result);
+
                 }
             }).then(result=>{
                 this.setState({'username':result});
                 fetch(gUrl.httpurl+'/getuserlist')
                           .then((response) => {
                             this.res=JSON.parse(response._bodyText);
-                            //console.log(this.res);
                             for(var i=0;i<this.res.length;i++){
                                 if(this.res[i].username==this.state.username){
                                   this.setState({userid:this.res[i].id});
                                 }
                             }
-                            //console.log(this.state);
                             fetch(gUrl.httpurl+'/getorderlistlength?userid='+this.state.userid)
                           .then((response) => {
-                              //console.log(response._bodyText)
                               this.setState({'orderlength':response._bodyText})
                               fetch(gUrl.httpurl+'/getfocuslistlength?userid='+this.state.userid)
                           .then((response) => {
-                              //console.log(response._bodyText)
                               this.setState({'focuslength':response._bodyText})
                               fetch(gUrl.httpurl+'/getfeedbacklistlength?userid='+this.state.userid)
                           .then((response) => {
-                              //console.log(response._bodyText)
                               this.setState({'feedbacklength':response._bodyText})
                         
                       })
@@ -130,12 +89,7 @@ export default class Minepage extends Component {
                           .catch((error) => {
                             console.log(error)
                           })
-          
             })
-
-            
-
-
     }
 
 
@@ -195,7 +149,6 @@ export default class Minepage extends Component {
                     </View>}
                 />
                 <FlatList
-                    //style={{ marginTop: -50 }}
                     data={this.state.sourceData2}
                     ItemSeparatorComponent={ItemDivideComponent}
                     renderItem={({ item }) => 
@@ -205,8 +158,7 @@ export default class Minepage extends Component {
                                 <Text style={styles.menutext}>{item.key}</Text>
                             </View>
                         </TouchableWithoutFeedback>
-                    </View>}
-                />
+                    </View>}/>
 
             </View>
         );
@@ -250,30 +202,22 @@ const styles = StyleSheet.create({
         //菜单列表第一项
         height: 40,
         backgroundColor: 'white',
-        //alignItems: 'center',
         marginTop: 15
     },
     menulist2: {
         //菜单列表第二项起
         height: 40,
         backgroundColor: 'white',
-        //alignItems: 'center',
-        //marginTop: 15
     },
     menutext: {
         fontSize: 15,
         color: 'black'
     },
     imgStyle: {
-        //头像背景图片
-        // 设置背景颜色
-        //backgroundColor:'green',
         // 设置宽度
         width: Dimensions.get('window').width,
         // 设置高度
         height: 100,
-        //resizeMode:'contain'
-
     },
     profilephoto: {
         //头像

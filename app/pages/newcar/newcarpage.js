@@ -1,25 +1,11 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Dimensions,
-    ScrollView,
-    TextInput,
-    TouchableWithoutFeedback,
-    FlatList,
-    AsyncStorage,
-    Linking
-} from 'react-native';
+import { AsyncStorage, Dimensions, FlatList, Image, Linking, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
-import Swipercomponent from './../components/swipercomponent';
 import Indexheader from './../components/indexheader';
+import Swipercomponent from './../components/swipercomponent';
 import Global from '../Global';
+
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
-
-
-
 
 export default class NewCarpage extends Component {
     static navigationOptions = {
@@ -44,7 +30,6 @@ export default class NewCarpage extends Component {
             .then((response) => {
               this.res=JSON.parse(response._bodyText);
               this.setState({'carlist':this.res})
-              //console.log(this.res[209])
             })
             .catch((error) => {
               console.log(error)
@@ -58,8 +43,7 @@ export default class NewCarpage extends Component {
             if (error) {
                 alert('读取失败')
             }else {
-                //console.log(result)
-                //JSON.parse(result);
+
             }
         }).then(result=>{
             Linking.openURL('tel:${'+ result +'}')
@@ -127,16 +111,8 @@ export default class NewCarpage extends Component {
                                 </View>
                             </TouchableWithoutFeedback>
                         } />
-
-                        
-
-                    
-
                 </ScrollView>
             </View>
-
-
-
         );
     }
 }
@@ -144,8 +120,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        //justifyContent: 'center',
-        //alignItems: 'stretch',
     },
     center: {
         height: 45,
@@ -155,9 +129,7 @@ const styles = StyleSheet.create({
 
     },
     center2: {
-        //height: 45,
         backgroundColor: 'white',
-        //flexDirection: 'row',
         alignItems: 'center',
         marginTop: -5
 
@@ -174,14 +146,9 @@ const styles = StyleSheet.create({
         color: 'black',
         marginTop: 10,
         marginStart: 5
-        //marginRight:-40
     },
     text2: {
         fontSize: 11,
-        //color: 'black',
-        //marginTop: 10,
-        //marginStart:5
-        //marginRight:-40
     },
     tabBarIcon: {
         width: 21,
@@ -227,7 +194,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-
     },
     zerobox: {
         justifyContent: 'center',
@@ -237,8 +203,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FF2d16',
         borderRadius: 10,
         flexDirection: 'row',
-
-
     },
     listtext: {
         height: 130,

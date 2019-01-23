@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Dimensions } from 'react-native';
 import Button from 'react-native-button';
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
-
 export default class Forgetpassword extends Component {
+
     static navigationOptions = {
         title: '忘记密码',
     };
-
 
     render() {
         return (
@@ -50,7 +50,6 @@ export default class Forgetpassword extends Component {
                     onPress={() => this.props.navigation.navigate('Main')}>
                     保存密码
                 </Button>
-
             </View>
         );
     }

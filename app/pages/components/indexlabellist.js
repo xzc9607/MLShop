@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Dimensions,
-    FlatList
-} from 'react-native';
-
-import IndexLabel from './indexlabel';
-import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import React, { Component } from 'react';
+import { Query } from "react-apollo";
+import { Dimensions, FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import IndexLabel from './indexlabel';
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 const query = gql`
@@ -25,6 +18,7 @@ query{
     }
 }
 `;
+
 const GetLabelList = () => (<Query
     query={query}>{
         ({ loading, error, data }) => {
@@ -250,43 +244,11 @@ const GetLabelList = () => (<Query
 
 export default class IndexLabellist extends Component {
 
-
-
     render() {
         return (
-            // <View>
-            //     <IndexLabel
-            //         labeltext={'0首付'}
-            //         bgcolor={'#f94806'} />
-
-            //     <View style={{ backgroundColor: 'white' }}>
-            //         <View style={styles.listtext}>
-            //             <View style={styles.listhead}><View style={{ alignItems: 'center' }}><Text style={{ color: 'white' }}>0首付</Text></View></View>
-            //             <View style={styles.listbody}>
-            //                 <View style={{ width: width / 2, marginStart: 20 }}>
-            //                     <Text style={{ color: 'black', fontSize: 30 }}>轩逸·纯电</Text>
-            //                     <Text>2018款 高配版</Text>
-            //                     <Text style={{ color: '#FF2d16' }}>首付5000元</Text>
-            //                     <Text>月供5000元</Text>
-            //                 </View>
-            //                 <View style={{ width: width / 2, justifyContent: 'center', alignItems: 'center', marginStart: -30 }}>
-            //                     <Image
-            //                         resizeMode='stretch' style={styles.listimage}
-            //                         source={require('./../../../static/img/car.jpg')} />
-            //                 </View>
-            //             </View>
-            //         </View>
-            //     </View>
-
-            // </View>
-
             <GetLabelList />
-
         );
-
-
     }
-
 }
 
 const styles = StyleSheet.create({

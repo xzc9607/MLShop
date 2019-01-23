@@ -1,27 +1,20 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    FlatList,
-    TouchableWithoutFeedback,
-    Alert,
-    AsyncStorage
-} from 'react-native';
+import { Alert, AsyncStorage, FlatList, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Indexheader from './indexheader';
-
+import Global from '../Global';
 
 export default class Sidemenucomponent extends Component {
     static navigationOptions = {
         header: null,
-
     };
 
     constructor(props){
         super(props);
+
         this.state={
             list:[]
         };
+
         //获取店铺列表
         fetch(gUrl.httpurl+'/getshoplist')
             .then((response) => {
@@ -31,9 +24,6 @@ export default class Sidemenucomponent extends Component {
             .catch((error) => {
               console.log(error)
             })
-
-        
-
     }
   
 
@@ -53,8 +43,7 @@ export default class Sidemenucomponent extends Component {
                             onPress={()=>{
                                 Alert.alert('已选择'+item.name);
                                 AsyncStorage.setItem('number',''+item.number+'');
-                            }}
-                        >
+                            }}>
                             <View style={{ height: 110, marginStart: 20 }}>
                                 <View style={{ justifyContent: 'center', marginTop: 10 }}><Text style={{ color: 'black', fontSize: 18 }}>{item.name}</Text></View>
                                 <View style={{ justifyContent: 'center', marginTop: 10 }}><Text>{item.address}</Text></View>
@@ -69,10 +58,6 @@ export default class Sidemenucomponent extends Component {
                     }
                 />
             </View>
-
         );
-
-
     }
-
 }

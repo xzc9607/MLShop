@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Dimensions, TextInput, Alert, Button,AsyncStorage } from 'react-native';
-import Icon from "react-native-vector-icons/AntDesign";
+import { Alert, AsyncStorage, Button, Dimensions, Text, TextInput, View } from 'react-native';
 import Minepageheader from './../../../components/minepageheader';
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
@@ -21,15 +21,13 @@ export default class userInformation extends Component {
             if (error) {
                 alert('读取失败')
             }else {
-                //console.log(result)
-                //JSON.parse(result);
+
             }
         }).then(result=>{
             this.setState({'username':result});
             fetch(gUrl.httpurl+'/getuserlist')
                       .then((response) => {
                         this.res=JSON.parse(response._bodyText);
-                        //console.log(this.res);
                         for(var i=0;i<this.res.length;i++){
                             if(this.res[i].username==this.state.username){
                               this.setState({userid:this.res[i].id})
@@ -48,10 +46,6 @@ export default class userInformation extends Component {
 
     static navigationOptions = {
         header:null
-        //headerTitle: 'afadsf',
-        //title: 'Home',
-        
-
     };
 
     add(){
@@ -61,8 +55,7 @@ export default class userInformation extends Component {
           "content":this.state.content,
           "number":this.state.number
         }
-        //console.log(formData)
-      
+     
         fetch(gUrl.httpurl+'/addfeedback',
         {
            method:"POST",   //请求方法
@@ -76,7 +69,6 @@ export default class userInformation extends Component {
               res=JSON.parse(response._bodyText)
               if(res.code==201){
                 Alert.alert('提交成功')
-                
               }else{
                   alert(res.msg)
               }
@@ -116,14 +108,7 @@ export default class userInformation extends Component {
                 <Button
                     onPress={()=> this.add()}
                     title="提交"
-                    color="red"
-                    />
-
-
-
-
-
-
+                    color="red"/>
             </View>
         );
     }

@@ -5,7 +5,6 @@ import Global from '../Global';
 import { AsyncStorage } from "react-native";
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
-
 export default class Login extends Component {
 
     constructor(props, context) {
@@ -23,25 +22,6 @@ export default class Login extends Component {
 
     };
 
-    // componentWillMount() {
-    //     BackHandler.addEventListener('hardwareBackPress', this.onBackAndroid);
-    // }
-
-    // componentWillUnmount() {
-    //     BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid);
-    // }
-
-    // onBackAndroid = () => {
-    //     if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
-    //         //最近2秒内按过back键，可以退出应用。
-    //         BackHandler.exitApp();
-    //         return false;
-    //     }
-    //     this.lastBackPressed = Date.now();
-    //     ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
-    //     // return true;
-    //     return true;
-    // };
 
     login() {
         let formData = {

@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    FlatList,
-    TouchableWithoutFeedback,
-    Alert
-} from 'react-native';
-import Indexheader from './indexheader';
-
-import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import React, { Component } from 'react';
+import { Query } from "react-apollo";
+import { Alert, FlatList, Text, TouchableWithoutFeedback, View } from 'react-native';
+import Indexheader from './indexheader';
+import Global from '../Global';
 
 const query = gql`
 query{
@@ -37,8 +30,7 @@ const GetShopList = () => (<Query
                         <TouchableWithoutFeedback
                             onPress={()=>{
                                 Alert.alert(item.id)
-                            }}
-                        >
+                            }}>
                             <View style={{ height: 110, marginStart: 20 }}>
                                 <View style={{ justifyContent: 'center', marginTop: 10 }}><Text style={{ color: 'black', fontSize: 18 }}>{item.name}</Text></View>
                                 <View style={{ justifyContent: 'center', marginTop: 10 }}><Text>{item.address}</Text></View>
@@ -52,9 +44,6 @@ const GetShopList = () => (<Query
                         </TouchableWithoutFeedback>
                     }
                 />
-
-
-
             )
         }
     }
@@ -62,8 +51,6 @@ const GetShopList = () => (<Query
 
 
 export default class IndexCarListComponent extends Component {
-
-
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -74,10 +61,6 @@ export default class IndexCarListComponent extends Component {
                 <View style={{ height: 1, backgroundColor: '#ebebeb' }}></View>
                 <GetShopList />
             </View>
-
         );
-
-
     }
-
 }

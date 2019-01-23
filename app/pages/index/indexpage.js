@@ -7,13 +7,9 @@ import Indexheader from './../components/indexheader';
 import Indexiconbox from './../components/indexiconbox';
 import Swipercomponent from './../components/swipercomponent';
 import IndexLabel from './../components/indexlabel';
-
-
-
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
-
-
 
 export default class Indexpage extends Component {
     static navigationOptions = {
@@ -39,11 +35,11 @@ export default class Indexpage extends Component {
             mckzq:[]
 
         };
+
         fetch(gUrl.httpurl+'/getcarlist')
             .then((response) => {
               this.res=JSON.parse(response._bodyText);
               this.setState({carlist:this.res});
-              //console.log(this.state.carlist)
               var lsf = [];
               var cdyg = [];
               var xcsj = [];
@@ -56,7 +52,6 @@ export default class Indexpage extends Component {
                 for (var i = 0; i < this.state.carlist.length; i++) {
                 if (this.state.carlist[i].label == '0首付') {
                     lsf.push(this.state.carlist[i]);
-                    //console.log(lsf);
                 } if (this.state.carlist[i].label == '新车上架') {
                     xcsj.push(this.state.carlist[i]);
                 } if (this.state.carlist[i].label == '超低月供') {
@@ -73,7 +68,6 @@ export default class Indexpage extends Component {
                     mckzq.push(this.state.carlist[i]);
                 }
             }
-
             this.setState({"lsf":lsf});
             this.setState({"cdyg":cdyg});
             this.setState({"xcsj":xcsj});
@@ -82,9 +76,6 @@ export default class Indexpage extends Component {
             this.setState({"zjq":zjq});
             this.setState({"zq":zq});
             this.setState({"mckzq":mckzq});
-
-            console.log(this.mckzqlayoutY);
-
             })
             .catch((error) => {
               console.log(error)
@@ -97,8 +88,7 @@ export default class Indexpage extends Component {
             if (error) {
                 alert('读取失败')
             }else {
-                //console.log(result)
-                //JSON.parse(result);
+
             }
         }).then(result=>{
             Linking.openURL('tel:${'+ result +'}')
@@ -116,9 +106,8 @@ export default class Indexpage extends Component {
                 <View style={styles.container}>
                     <Indexheader />
                     <View style={{ height: 45, backgroundColor: 'white', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }}>
-                        <View
-                            style={{ justifyContent: 'flex-start' }}
-                        >
+                        
+                        <View style={{ justifyContent: 'flex-start' }}>
                             <TouchableWithoutFeedback onPress={() => {
                                 this.setState({
                                     isOpen: true
@@ -127,16 +116,20 @@ export default class Indexpage extends Component {
                                 <Text style={{ justifyContent: 'center' }} >店铺<Icon name='down' size={15} color="#000" /></Text>
                             </TouchableWithoutFeedback>
                         </View>
-                        <TouchableWithoutFeedback  onPress={() => this.props.navigation.navigate('Search')}>
-                        <View style={{ height: 35, width: (width / 4) * 3, backgroundColor: '#f1f1f1', borderRadius: 15, justifyContent: 'center',alignItems:'center' }}>
-                            <View style={{flexDirection:'row'}}><Icon name='search1' size={15} color="#000" /><Text>搜索</Text></View>
-                        </View>
-                        </TouchableWithoutFeedback>
-                        <View
-                            style={{ justifyContent: 'flex-end', marginStart: 10 }}
-                        ><TouchableWithoutFeedback  onPress={() => this.getnumber()}><Icon name='phone' size={20} color="#000" /></TouchableWithoutFeedback></View>
-                    </View>
 
+                        <TouchableWithoutFeedback  onPress={() => this.props.navigation.navigate('Search')}>
+                            <View style={{ height: 35, width: (width / 4) * 3, backgroundColor: '#f1f1f1', borderRadius: 15, justifyContent: 'center',alignItems:'center' }}>
+                                <View style={{flexDirection:'row'}}><Icon name='search1' size={15} color="#000" /><Text>搜索</Text></View>
+                            </View>
+                        </TouchableWithoutFeedback>
+
+                        <View style={{ justifyContent: 'flex-end', marginStart: 10 }}>
+                        
+                            <TouchableWithoutFeedback  onPress={() => this.getnumber()}>
+                                <Icon name='phone' size={20} color="#000" />
+                            </TouchableWithoutFeedback>
+                        </View>
+                    </View>
 
                     <ScrollView ref={(view) => { this.myScrollView = view; }}>
                         <View style={styles.swiperview}>
@@ -197,38 +190,38 @@ export default class Indexpage extends Component {
                                         </View>
                                     </View>
                                 </View>
-                                </TouchableWithoutFeedback>
+                            </TouchableWithoutFeedback>
                             } />
                         </View>
-                        <View
-                        onLayout={event=>{this.mckzqlayoutY = event.nativeEvent.layout.y}}>
-                        
-                        <IndexLabel
-                            labeltext={'买车可赚钱'}
-                            bgcolor={'#00b7ee'} />
-                        <FlatList
-                            data={this.state.mckzq}
-                            renderItem={({ item }) =>
-                            <TouchableWithoutFeedback
-                            onPress={() => this.props.navigation.navigate('CarPage',{item})}>
-                                <View style={{ backgroundColor: 'white' }}>
-                                    <View style={styles.listtext}>
-                                        <View style={styles.listhead}><View style={{ alignItems: 'center' }}><Text style={{ color: 'white' }}>{item.label}</Text></View></View>
-                                        <View style={styles.listbody}>
-                                            <View style={{ width: width / 2, marginStart: 20 }}>
-                                                <Text style={{ color: 'black', fontSize: 30 }}>{item.brand}</Text>
-                                                <Text>{item.model}</Text>
-                                                <Text style={{ color: '#FF2d16' }}>首付5000元</Text>
-                                                <Text>月供5000元</Text>
-                                            </View>
-                                            <View style={{ width: width / 2, justifyContent: 'center', alignItems: 'center', marginStart: -30 }}>
-                                                <Image
-                                                    resizeMode='stretch' style={styles.listimage}
-                                                    source={require('./../../../static/img/car.jpg')} />
+
+                        <View onLayout={event=>{this.mckzqlayoutY = event.nativeEvent.layout.y}}>
+        
+                            <IndexLabel
+                                labeltext={'买车可赚钱'}
+                                bgcolor={'#00b7ee'} />
+                            <FlatList
+                                data={this.state.mckzq}
+                                renderItem={({ item }) =>
+                                <TouchableWithoutFeedback
+                                onPress={() => this.props.navigation.navigate('CarPage',{item})}>
+                                    <View style={{ backgroundColor: 'white' }}>
+                                        <View style={styles.listtext}>
+                                            <View style={styles.listhead}><View style={{ alignItems: 'center' }}><Text style={{ color: 'white' }}>{item.label}</Text></View></View>
+                                            <View style={styles.listbody}>
+                                                <View style={{ width: width / 2, marginStart: 20 }}>
+                                                    <Text style={{ color: 'black', fontSize: 30 }}>{item.brand}</Text>
+                                                    <Text>{item.model}</Text>
+                                                    <Text style={{ color: '#FF2d16' }}>首付5000元</Text>
+                                                    <Text>月供5000元</Text>
+                                                </View>
+                                                <View style={{ width: width / 2, justifyContent: 'center', alignItems: 'center', marginStart: -30 }}>
+                                                    <Image
+                                                        resizeMode='stretch' style={styles.listimage}
+                                                        source={require('./../../../static/img/car.jpg')} />
+                                                </View>
                                             </View>
                                         </View>
                                     </View>
-                                </View>
                                 </TouchableWithoutFeedback>
                             } />
                             </View>
@@ -360,18 +353,10 @@ export default class Indexpage extends Component {
                             } />
                             </View>
                         
-                    
                         <View style={{ height: 5, backgroundColor: '#ebebeb' }}></View>
 
-
-                
                     </ScrollView>
                 </View>
-
-
-
-
-
             </SideMenu>
 
         );
@@ -385,7 +370,6 @@ const styles = StyleSheet.create({
     narbarview: {
         height: 45,
         backgroundColor: 'white',
-        //flex: 1, 
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

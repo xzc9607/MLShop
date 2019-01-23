@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Dimensions
-} from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 export default class IndexLabel extends Component {
-
-
     render() {
         return (
             <View>
@@ -26,10 +19,8 @@ export default class IndexLabel extends Component {
                         flexDirection: 'row',
                     }}>
                         <View><Text style={{ fontSize: 20, color: 'white' }}>{this.props.labeltext}</Text></View>
-            
                     </View>
                 </View>
-
             </View>
         );
 

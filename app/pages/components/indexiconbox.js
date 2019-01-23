@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    Image,
-    StyleSheet,
-    Dimensions,
-    TouchableWithoutFeedback,
-
-} from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
+import Global from '../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 
 export default class Indexiconbox extends Component {
+
     constructor(props){
         super(props);
     }
-
 
     render() {
         return (
@@ -25,34 +18,28 @@ export default class Indexiconbox extends Component {
                 <View style={styles.iconboxview1}>
                     <View style={styles.iconbox}>
                         <View style={styles.ciclebox1}>
-                            <TouchableWithoutFeedback 
-                            >
-                                <View>
-                                    <Icon name='car' size={25} color="#fff" />
-                                </View>
+                            <TouchableWithoutFeedback>
+                                <View><Icon name='car' size={25} color="#fff" /></View>
                             </TouchableWithoutFeedback>
                         </View>
                     </View>
 
                     <View style={styles.iconbox}>
                         <View style={styles.ciclebox2}>
-                            <View>
-                                <Icon name='sync' size={25} color="#fff" />
-                            </View></View>
+                            <View><Icon name='sync' size={25} color="#fff" /></View>
+                        </View>
                     </View>
 
                     <View style={styles.iconbox}>
                         <View style={styles.ciclebox3}>
-                            <View>
-                                <Icon name='wallet' size={25} color="#fff" />
-                            </View></View>
+                            <View><Icon name='wallet' size={25} color="#fff" /></View>
+                        </View>
                     </View>
 
                     <View style={styles.iconbox}>
                         <View style={styles.ciclebox4}>
-                            <View>
-                                <Icon name='Safety' size={25} color="#fff" />
-                            </View></View>
+                            <View><Icon name='Safety' size={25} color="#fff" /></View>
+                        </View>
                     </View>
                 </View>
 
@@ -74,10 +61,7 @@ export default class Indexiconbox extends Component {
                 </View>
             </View>
         );
-
-
     }
-
 }
 
 const styles = StyleSheet.create({
