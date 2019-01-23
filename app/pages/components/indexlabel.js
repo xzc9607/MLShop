@@ -26,8 +26,7 @@ export default class IndexLabel extends Component {
                         flexDirection: 'row',
                     }}>
                         <View><Text style={{ fontSize: 20, color: 'white' }}>{this.props.labeltext}</Text></View>
-                        <View style={{ width: (width / 10) * 4 }}></View>
-                        <View style={{ width: (width / 5), height: 30, backgroundColor: 'white', borderRadius: 10, justifyContent: 'center', alignItems: 'center', }}><Text style={{ fontSize: 15, color: '#FF2d16' }}>更多车型</Text></View>
+            
                     </View>
                 </View>
 

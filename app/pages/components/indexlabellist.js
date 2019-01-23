@@ -41,11 +41,11 @@ const GetLabelList = () => (<Query
                 return null;
             } else {
                 this.carlist = data.CarInfoList.content;
-                console.log(this.carlist);
+                //console.log(this.carlist);
                 for (var i = 0; i < this.carlist.length; i++) {
                     if (this.carlist[i].label == '0首付') {
                         lsf.push(this.carlist[i]);
-                        console.log(lsf);
+                        //console.log(lsf);
                     } if (this.carlist[i].label == '新车上架') {
                         xcsj.push(this.carlist[i]);
                     } if (this.carlist[i].label == '超低月供') {
@@ -66,6 +66,8 @@ const GetLabelList = () => (<Query
                 return (
 
                     <View>
+
+                        <View>
                         <IndexLabel
                             labeltext={'0首付'}
                             bgcolor={'#f94806'} />
@@ -91,6 +93,10 @@ const GetLabelList = () => (<Query
                                     </View>
                                 </View>
                             } />
+                        </View>
+                        <View
+                        onLayout={event=>{this.layoutY = event.nativeEvent.layout.y;this.layoutX=event.nativeEvent.layout.x}}>
+                        
 
                         <IndexLabel
                             labeltext={'买车可赚钱'}
@@ -117,7 +123,8 @@ const GetLabelList = () => (<Query
                                     </View>
                                 </View>
                             } />
-
+                            </View>
+                            <View>
                         <IndexLabel
                             labeltext={'5%专区'}
                             bgcolor={'#ff2e75'} />
@@ -143,7 +150,8 @@ const GetLabelList = () => (<Query
                                     </View>
                                 </View>
                             } />
-
+                            </View>
+                            <View>
                         <IndexLabel
                             labeltext={'直降区'}
                             bgcolor={'#ff4141'} />
@@ -169,7 +177,9 @@ const GetLabelList = () => (<Query
                                     </View>
                                 </View>
                             } />
+                            </View>
 
+                            <View>
                         <IndexLabel
                             labeltext={'热销好车'}
                             bgcolor={'#bd69d8'} />
@@ -195,6 +205,9 @@ const GetLabelList = () => (<Query
                                     </View>
                                 </View>
                             } />
+                            </View>
+
+                            <View>
 
                         <IndexLabel
                             labeltext={'超低月供'}
@@ -221,6 +234,7 @@ const GetLabelList = () => (<Query
                                     </View>
                                 </View>
                             } />
+                            </View>
 
                     </View>
 
@@ -235,6 +249,7 @@ const GetLabelList = () => (<Query
 </Query>);
 
 export default class IndexLabellist extends Component {
+
 
 
     render() {
