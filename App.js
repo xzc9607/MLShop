@@ -24,10 +24,6 @@ import Purchasepage from './app/pages/purchase/purchasepage';
 import Aboutpage from './app/pages/mine/childrenpage/mySetting/about/aboutpage';
 import Searchpage from './app/pages/search/searchpage';
 
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-import gql from 'graphql-tag';
-
 const RootStack = createStackNavigator(
   {
     //登陆页面
@@ -70,17 +66,12 @@ const RootStack = createStackNavigator(
   }
 );
 
-const client = new ApolloClient({
-  uri: `http://115.159.154.194/mlshop/graphql`
-});
-
 const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
   render() {
-    return <ApolloProvider client={client}>
-              <AppContainer/>
-          </ApolloProvider>;
+    return <AppContainer/>;
+
   }
 }
 

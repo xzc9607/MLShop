@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dimensions, Image, Text, View } from 'react-native';
 import Indexheader from './../../../../components/indexheader';
-import Global from '../Global';
+import Global from '../../../../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 

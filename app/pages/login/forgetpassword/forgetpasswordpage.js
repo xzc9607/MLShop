@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, Dimensions } from 'react-native';
 import Button from 'react-native-button';
-import Global from '../Global';
+import Global from '../../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 

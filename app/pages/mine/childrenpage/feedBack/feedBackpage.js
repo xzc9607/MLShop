@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, AsyncStorage, Button, Dimensions, Text, TextInput, View } from 'react-native';
 import Minepageheader from './../../../components/minepageheader';
-import Global from '../Global';
+import Global from '../../../Global';
 
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 

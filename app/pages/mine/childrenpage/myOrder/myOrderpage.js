@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Image, Dimensions ,AsyncStorage,FlatList} from 'react-native';
 import Minepageheader from './../../../components/minepageheader';
-import Global from '../Global';
-
+import Global from '../../../Global';
 const { width } = Dimensions.get('window')//获取当前屏幕宽度
 
 export default class myOrder extends Component {

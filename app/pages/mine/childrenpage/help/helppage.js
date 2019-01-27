@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import Button from 'react-native-button';
-import Global from '../Global';
-
+import Global from '../../../Global';
 export default class help extends Component {
   constructor(props){
     super(props);
