@@ -23,9 +23,6 @@ export default class Minepage extends Component {
     
     constructor(props) {
         super(props);
-        ()=>{
-            this.props.navigation.setParams({abc: 'Updated!'})
-        }
 
         this.state = {
             sourceData1: [
@@ -44,59 +41,40 @@ export default class Minepage extends Component {
             feedbacklength:null
   
         }
-
+            //关注数获取
             AsyncStorage.getItem('user', function (error, result) {
-                if (error) {
-                    alert('读取失败')
-                }else {
-
-                }
+                if (error) {alert('读取失败')
+                }else {}
             }).then(result=>{
                 this.setState({'username':result});
                 fetch(gUrl.httpurl+'/getuserlist')
-                          .then((response) => {
-                            this.res=JSON.parse(response._bodyText);
-                            for(var i=0;i<this.res.length;i++){
-                                if(this.res[i].username==this.state.username){
-                                  this.setState({userid:this.res[i].id});
-                                }
+                    .then((response) => {
+                        this.res=JSON.parse(response._bodyText);
+                        for(var i=0;i<this.res.length;i++){
+                            if(this.res[i].username==this.state.username){
+                                this.setState({userid:this.res[i].id});
                             }
-                            fetch(gUrl.httpurl+'/getorderlistlength?userid='+this.state.userid)
-                          .then((response) => {
-                              this.setState({'orderlength':response._bodyText})
-                              fetch(gUrl.httpurl+'/getfocuslistlength?userid='+this.state.userid)
-                          .then((response) => {
-                              this.setState({'focuslength':response._bodyText})
-                              fetch(gUrl.httpurl+'/getfeedbacklistlength?userid='+this.state.userid)
-                          .then((response) => {
-                              this.setState({'feedbacklength':response._bodyText})
-                        
-                      })
-                      .catch((error) => {
-                        console.log(error)
-                      })
-                        
-                      })
-                      .catch((error) => {
-                        console.log(error)
-                      })
-                        
-                      })
-                      .catch((error) => {
-                        console.log(error)
-                      })
-                          })
-                          .catch((error) => {
-                            console.log(error)
-                          })
+                        }
+                        fetch(gUrl.httpurl+'/getorderlistlength?userid='+this.state.userid)
+                            .then((response) => {
+                                this.setState({'orderlength':response._bodyText})
+                                fetch(gUrl.httpurl+'/getfocuslistlength?userid='+this.state.userid)
+                                .then((response) => {
+                                    this.setState({'focuslength':response._bodyText})
+                                    fetch(gUrl.httpurl+'/getfeedbacklistlength?userid='+this.state.userid)
+                                        .then((response) => {this.setState({'feedbacklength':response._bodyText})})
+                                        .catch((error) => {console.log(error)});
+                                })
+                                .catch((error) => {console.log(error)})
+                            })
+                            .catch((error) => {console.log(error)})
+                    })
+                    .catch((error) => {console.log(error)})
             })
     }
 
-
-
     render() {
         return (
-            //头部
             <View style={styles.container}>
                 <Minepageheader/>
                 <View style={styles.profilephotoview}>
